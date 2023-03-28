@@ -19,26 +19,30 @@ async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_BACKTRACE", "1");
     env_logger::init();
 
-    // let database_url = std::env!("DATABASE_URL");
-    // let server_port = std::env!("BACKEND_PORT")
-    //     .parse::<u16>()
-    //     .expect("Port must be a u16");
+    let database_url = std::env!("DATABASE_URL");
+    let server_port = std::env!("BACKEND_PORT")
+        .parse::<u16>()
+        .expect("Port must be a u16");
 
-    // let app_state = web::Data::new(AppState {
-    //     pool: sqlx::pool::PoolOptions::new()
-    //         .connect(&database_url)
-    //         .await
-    //         .expect("Could not connect to the DB"),
-    // });
+    let app_state = web::Data::new(AppState {
+        pool: sqlx::pool::PoolOptions::new()
+            .connect(&database_url)
+            .await
+            .expect("Could not connect to the DB"),
+    });
 
     HttpServer::new(move || {
         let logger = Logger::default();
         App::new().wrap(logger).service(
             scope("/api")
                 .service(scope("/front").service(get_data))
-                .service(scope("/mob").service(get_task)),
+                .service(scope("/mob").service(send_data)),
         )
     })
+    .bind(("0.0.0.0", 8000))?
+    .run()
+    .await
+
     // HttpServer::new(move || {
     //     App::new()
     //         .app_data(app_state.clone())
@@ -49,7 +53,4 @@ async fn main() -> std::io::Result<()> {
     //         .route("/", web::put().to(memo::resolve))
     //         .route("/", web::delete().to(memo::delete))
     // })
-    .bind(("0.0.0.0", 8000))?
-    .run()
-    .await
 }
