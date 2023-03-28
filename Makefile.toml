@@ -1,43 +1,50 @@
-  [env.docker]
-  RUST_LOG="debug"
-  DATABASE_URL="postgresql://user:password@postgres:5432/db"
-  BACKEND_URL="http://localhost:3000"
-  BACKEND_PORT=3000
+[env.docker]
+RUST_LOG="debug"
+DATABASE_URL="postgresql://user:password@postgres:5432/db"
+BACKEND_URL="http://localhost:3000"
+BACKEND_PORT=3000
 
-  [env.release]
-  RUST_LOG="info"
-  DATABASE_URL="${DATABASE_URL}"
-  BACKEND_URL="${BACKEND_URL}"
-  BACKEND_PORT="${BACKEND_PORT}"
-  SQLX_OFFLINE=true
+[env.release]
+RUST_LOG="info"
+DATABASE_URL="${DATABASE_URL}"
+BACKEND_URL="${BACKEND_URL}"
+BACKEND_PORT="${BACKEND_PORT}"
+SQLX_OFFLINE=true
 
-  [config]
-  default_to_workspace = false
+[config]
+default_to_workspace = false
 
-  [tasks.backend-run]
-  command = "cargo"
-  args = ["run", "-p", "backend"]
+[tasks.backend-run]
+command = "cargo"
+args = ["run", "-p", "backend"]
 
-  [tasks.backend-build]
-  command = "cargo"
-  args = ["build", "--release", "-p", "backend"]
+[tasks.backend-build]
+command = "cargo"
+args = ["build", "--release", "-p", "backend"]
 
-  [tasks.frontend-run]
-  command = "trunk"
-  args = ["serve", "--address", "0.0.0.0", "--dist", "./target/dist", "./frontend/index.html"]
+[tasks.frontend-run]
+command = "trunk"
+args = ["serve", "--address", "0.0.0.0", "--dist", "./target/dist", "./frontend/index.html"]
 
-  [tasks.frontend-build]
-  command = "trunk"
-  args = ["build", "--release", "--dist", "./dist", "./frontend/index.html"]
+[tasks.frontend-build]
+command = "trunk"
+args = ["build", "--release", "--dist", "./dist", "./frontend/index.html"]
 
-  [tasks.db-migration]
-  command = "cargo"
-  args = ["sqlx", "migrate", "add", "${@}"]
+[tasks.db-migration]
+command = "cargo"
+args = ["sqlx", "migrate", "add", "${@}"]
 
-  [tasks.db-setup]
-  command = "sqlx"
-  args = ["database", "setup", "--source=./migrations/"]
+[tasks.db-setup]
+command = "sqlx"
+args = ["database", "setup", "--source=./migrations/"]
 
-  [tasks.db-prepare]
-  command = "cargo"
-  args = ["sqlx", "prepare", "--", "-p", "backend"]
+[tasks.db-prepare]
+command = "cargo"
+args = ["sqlx", "prepare", "--", "-p", "backend"]
+
+[tasks.my-flow]
+dependencies = [
+    "format",
+    "build",
+    "test"
+]
