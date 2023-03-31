@@ -2,7 +2,7 @@ use yew::prelude::*;
 
 #[function_component]
 fn App() -> Html {
-     let onclick = {
+    let onclick = {
         move |_| {
             web_sys::window()
                 .unwrap()
@@ -13,7 +13,7 @@ fn App() -> Html {
 
     html! {
         <main>
-        
+
         <div style="text-align: center">
         <h1>{ "Futuro Nombre del Proyecto de PTI" }</h1>
         <p>{ "Introduce el usuario y la contraseña." }</p>

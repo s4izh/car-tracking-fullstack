@@ -1,7 +1,8 @@
 [env.docker]
 RUST_LOG="debug"
+RUST_BACKTRACE="1"
 DATABASE_URL="postgresql://user:password@postgres:5432/db"
-BACKEND_URL="http://localhost:3000"
+BACKEND_URL="http://localhost"
 BACKEND_PORT=3000
 
 [env.release]
@@ -9,7 +10,6 @@ RUST_LOG="info"
 DATABASE_URL="${DATABASE_URL}"
 BACKEND_URL="${BACKEND_URL}"
 BACKEND_PORT="${BACKEND_PORT}"
-SQLX_OFFLINE=true
 
 [config]
 default_to_workspace = false
@@ -42,9 +42,5 @@ args = ["database", "setup", "--source=./migrations/"]
 command = "cargo"
 args = ["sqlx", "prepare", "--", "-p", "backend"]
 
-[tasks.my-flow]
-dependencies = [
-    "format",
-    "build",
-    "test"
-]
+[tasks.dev]
+dependencies = ["backend-run"]

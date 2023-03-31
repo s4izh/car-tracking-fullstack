@@ -1,56 +1,30 @@
-use actix_web::{
-    // web::Data,
-    middleware::Logger,
-    web::scope,
-    App,
-    HttpServer,
-};
-use std::env::set_var;
+use actix_web::{web, App, HttpServer};
 
-mod api;
-
-use api::front::get_data;
-use api::mob::get_task;
+mod routes;
+use routes::frontend;
+use routes::mobile;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    // this is for logging into the terminal
-    std::env::set_var("RUST_LOG", "debug");
-    std::env::set_var("RUST_BACKTRACE", "1");
     env_logger::init();
 
-    let database_url = std::env!("DATABASE_URL");
-    let server_port = std::env!("BACKEND_PORT")
-        .parse::<u16>()
-        .expect("Port must be a u16");
+    // set DATABASE_URL and SERVER_PORT
+    let _database_url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
 
-    let app_state = web::Data::new(AppState {
-        pool: sqlx::pool::PoolOptions::new()
-            .connect(&database_url)
-            .await
-            .expect("Could not connect to the DB"),
-    });
+    let backend_port: u16 = std::env::var("BACKEND_PORT")
+        .expect("BACKEND_PORT must be set")
+        .parse()
+        .expect("BACKEND_PORT must be a number");
 
     HttpServer::new(move || {
-        let logger = Logger::default();
+        let logger = actix_web::middleware::Logger::default();
         App::new().wrap(logger).service(
-            scope("/api")
-                .service(scope("/front").service(get_data))
-                .service(scope("/mob").service(send_data)),
+            web::scope("/api")
+                .service(web::scope("/frontend").service(frontend::index))
+                .service(web::scope("/mobile").service(mobile::index)),
         )
     })
-    .bind(("0.0.0.0", 8000))?
+    .bind(("0.0.0.0", backend_port))?
     .run()
     .await
-
-    // HttpServer::new(move || {
-    //     App::new()
-    //         .app_data(app_state.clone())
-    //         .wrap(actix_web::middleware::Logger::default())
-    //         .wrap(actix_cors::Cors::permissive())
-    //         .route("/", web::get().to(memo::index))
-    //         .route("/", web::post().to(memo::create))
-    //         .route("/", web::put().to(memo::resolve))
-    //         .route("/", web::delete().to(memo::delete))
-    // })
 }
