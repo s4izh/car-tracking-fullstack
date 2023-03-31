@@ -1,6 +1,6 @@
 [env.docker]
 RUST_LOG="debug"
-RUST_BACKTRACE="1"
+#RUST_BACKTRACE="1"
 DATABASE_URL="postgresql://user:password@postgres:5432/db"
 BACKEND_URL="http://localhost"
 BACKEND_PORT=3000

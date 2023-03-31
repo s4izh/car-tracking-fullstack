@@ -1,8 +1,20 @@
 use actix_web::{web, App, HttpServer};
+use actix_web::web::scope;
+
+use handlebars::Handlebars;
 
 mod routes;
 use routes::frontend;
 use routes::mobile;
+
+pub async fn not_found(req: actix_web::HttpRequest, handlebars: web::Data<Handlebars<'_>>) -> impl actix_web::Responder {
+    let data = serde_json::json!({ "url": &req.uri().to_string() });
+    let body = handlebars.render("not-found", &data).unwrap();
+
+    actix_web::HttpResponse::NotFound()
+        // .status(actix_web::http::StatusCode::NOT_FOUND)
+        .body(body)
+}
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -16,13 +28,28 @@ async fn main() -> std::io::Result<()> {
         .parse()
         .expect("BACKEND_PORT must be a number");
 
+    let mut handlebars = Handlebars::new();
+
+    handlebars
+        .register_templates_directory(".html", "./backend/templates/")
+        .unwrap();
+
+    let data = web::Data::new(handlebars);
+
     HttpServer::new(move || {
         let logger = actix_web::middleware::Logger::default();
-        App::new().wrap(logger).service(
-            web::scope("/api")
-                .service(web::scope("/frontend").service(frontend::index))
-                .service(web::scope("/mobile").service(mobile::index)),
-        )
+        App::new()
+            .wrap(logger)
+            .app_data(data.clone())
+            .service(scope("/api")
+                .service(scope("/frontend")
+                    .service(frontend::index)
+                    .service(frontend::get_data))
+                .service(scope("/mobile")
+                    .service(mobile::index)
+                    .service(mobile::send_data))
+            )
+            .default_service(web::route().to(not_found))
     })
     .bind(("0.0.0.0", backend_port))?
     .run()

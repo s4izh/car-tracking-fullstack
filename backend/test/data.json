@@ -1,0 +1,11 @@
+{
+  "matricula": 666,
+  "speed": 180,
+  "rpm": 7000,
+  "coolant_temp": 0,
+  "oil_temp": 0,
+  "throttle_pos": 0,
+  "engine_load": 0,
+  "fuel_level": 0,
+  "fuel_consumption": 0
+}
