@@ -1,7 +1,7 @@
 [env.docker]
 RUST_LOG="debug"
 #RUST_BACKTRACE="1"
-DATABASE_URL="postgresql://user:password@postgres:5432/db"
+DATABASE_URL="postgres://pti:pti@localhost/pti"
 BACKEND_URL="http://localhost"
 BACKEND_PORT=3000
 
@@ -31,12 +31,12 @@ command = "trunk"
 args = ["build", "--release", "--dist", "./dist", "./frontend/index.html"]
 
 [tasks.db-migration]
-command = "cargo"
-args = ["sqlx", "migrate", "add", "${@}"]
+command = "diesel"
+args = ["migration", "run"]
 
-[tasks.db-setup]
-command = "sqlx"
-args = ["database", "setup", "--source=./migrations/"]
+[tasks.db-redo]
+command = "diesel"
+args = ["migration", "redo"]
 
 [tasks.db-prepare]
 command = "cargo"
