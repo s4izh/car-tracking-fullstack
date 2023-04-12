@@ -10,7 +10,6 @@ use handlebars::Handlebars;
 
 mod routes;
 use routes::frontend;
-
 use routes::mobile;
 
 pub async fn not_found(
@@ -30,7 +29,7 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
 
     // set DATABASE_URL and SERVER_PORT
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    let _database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
     // let connection = PgConnection::establish(&database_url)
     //     .expect(&format!("Error connecting to {}", database_url));
 
