@@ -1,34 +1,40 @@
 version: "3"
 
 services:
-  database-diesel:
-    container_name: database-diesel
-    image: postgres:${POSTGRES_VERSION:-13}-alpine
+  mariadb:
+    container_name: pti-mariadb
+    image: mariadb:10.6.4-focal
+    command: '--default-authentication-plugin=mysql_native_password'
+    restart: always
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-diesel}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
-      POSTGRES_USER: ${POSTGRES_USER:-diesel}
-    ports:
-      - "5432:5432"
+      - MYSQL_ROOT_PASSWORD=rust
+      - MYSQL_DATABASE=db
+      - MYSQL_USER=db
+      - MYSQL_PASSWORD=db
+    expose:
+      - 3306
+      - 33060
     volumes:
-      - db-diesel:/var/lib/postgresql/data:rw
-  diesel-learn:
-    container_name: diesel-learn
+      - db-data:/var/lib/mysql
+  backend:
+    container_name: pti-rust-backend
+    # image: rust:latest
     stdin_open: true
     tty: true
     environment:
-      - DATABASE_URL=postgres://${POSTGRES_USER:-diesel}:${POSTGRES_PASSWORD:-password}@database-diesel/${POSTGRES_DB:-diesel}
+      - DATABASE_URL=mysql://db:db@mariadb/db
+      - BACKEND_PORT=8080
     build:
-      context: ./
-      dockerfile: ./Dockerfile
+      context: backend
+    working_dir: /code
     volumes:
-      - ./:/diesel-learn
-      - diesel-learn-target:/diesel/target
+      - ./:/code
+      - backend-cache:/code/target
     depends_on:
-      - database-diesel
+      - mariadb
+    ports:
+      - 8080:8080
 
 volumes:
-  # postgres data
-  db-diesel:
-  # rust data
-  diesel-learn-target:
+  db-data:
+  backend-cache:
