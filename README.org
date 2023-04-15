@@ -1,0 +1,19 @@
+#+title: Instrucciones
+
+* Running the dev enviromment
+Run docker and open a shell inside the backend container
+
+#+begin_src sh
+  docker-compose run --service-ports backend
+#+end_src
+
+* Testing a local deploy
+
+To run everything remove the comment: =# command: ...= on =docker-compose.yml=, then:
+
+#+begin_src sh
+  docker-compose up -d
+#+end_src
+
+This will leave the service exposed at port 8080 of the container and also
+on the localhost.
