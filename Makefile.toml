@@ -1,9 +1,9 @@
 [env.docker]
 RUST_LOG="debug"
 #RUST_BACKTRACE="1"
-DATABASE_URL="postgres://pti:pti@localhost/pti"
-BACKEND_URL="http://localhost"
-BACKEND_PORT=3000
+DATABASE_URL="${DATABASE_URL}"
+BACKEND_URL="${BACKEND_URL}"
+BACKEND_PORT="${BACKEND_PORT}"
 
 [env.release]
 RUST_LOG="info"
