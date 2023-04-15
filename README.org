@@ -1,13 +1,13 @@
-#+title: Instrucciones
+#+title: Instructions
 
-* Running the dev enviromment
+** Running the dev enviromment
 Run docker and open a shell inside the backend container
 
 #+begin_src sh
   docker-compose run --service-ports backend
 #+end_src
 
-* Testing a local deploy
+** Testing a local deploy
 
 To run everything remove the comment: =# command: ...= on =docker-compose.yml=, then:
 
