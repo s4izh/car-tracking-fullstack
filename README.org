@@ -5,6 +5,13 @@ Run docker and open a shell inside the backend container
 
 #+begin_src sh
   docker-compose run --service-ports backend
+  cargo make --profile docker backend-run # to run the backend listening on port 8080
+#+end_src
+
+To also open a shell in the mariadb container run this command on another terminal:
+
+#+begin_src sh
+  docker exec -ti mariadb /bin/bash
 #+end_src
 
 ** Testing a local deploy
@@ -17,3 +24,13 @@ To run everything remove the comment: =# command: ...= on =docker-compose.yml=, 
 
 This will leave the service exposed at port 8080 of the container and also
 on the localhost.
+
+** Removing docker images and containers
+
+Si la liais asi se borra todo lo del docker:
+
+#+begin_src sh
+  docker rm -f $(docker ps -aq)
+  docker rmi -f $(docker images -aq)
+  docker volume rm $(docker volume ls -q)
+#+end_src
