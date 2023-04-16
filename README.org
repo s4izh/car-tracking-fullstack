@@ -5,7 +5,7 @@ Run docker and open a shell inside the backend container
 
 #+begin_src sh
   docker-compose run --service-ports backend
-  cargo make --profile docker backend-run # to run the backend listening on port 8080
+  cargo make --profile dev backend-run # to run the backend listening on port 8080
 #+end_src
 
 To also open a shell in the mariadb container run this command on another terminal:
