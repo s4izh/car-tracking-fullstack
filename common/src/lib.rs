@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct CarGeneralData {
     pub matricula: i32,
+    pub timestamp: i32,
     pub speed: i32,
     pub rpm: i32,
     pub coolant_temp: i32,
