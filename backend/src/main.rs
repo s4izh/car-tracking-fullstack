@@ -6,7 +6,8 @@ use actix_web::{web, App, HttpServer};
 use handlebars::Handlebars;
 
 use diesel::mysql::MysqlConnection;
-use diesel::prelude::*;
+// use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, Pool};
 
 mod routes;
 use routes::frontend;
@@ -15,16 +16,8 @@ use routes::mobile;
 mod db;
 // use db::utils;
 
-pub async fn not_found(
-    req: actix_web::HttpRequest,
-    handlebars: web::Data<Handlebars<'_>>,
-) -> impl actix_web::Responder {
-    let data = serde_json::json!({ "url": &req.uri().to_string() });
-    let body = handlebars.render("not-found", &data).unwrap();
-
-    actix_web::HttpResponse::NotFound()
-        // .status(actix_web::http::StatusCode::NOT_FOUND)
-        .body(body)
+pub async fn not_found(_req: actix_web::HttpRequest) -> impl actix_web::Responder {
+    actix_web::HttpResponse::NotFound().body("404 Not Found")
 }
 
 #[actix_web::main]
@@ -32,30 +25,28 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
 
     // set DATABASE_URL and SERVER_PORT
-
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    // let _db_connection =
+    //     MysqlConnection::establish(&database_url).expect("Error connecting to the database");
 
-    let _db_connection =
-        MysqlConnection::establish(&database_url).expect("Error connecting to the database");
+    let _db_pool = {
+        let manager: ConnectionManager<MysqlConnection> =
+            ConnectionManager::<MysqlConnection>::new(&database_url);
+        Pool::builder()
+            .build(manager)
+            .expect("Error building a connection pool")
+    };
 
     let backend_port: u16 = env::var("BACKEND_PORT")
         .expect("BACKEND_PORT must be set")
         .parse()
         .expect("BACKEND_PORT must be a number");
 
-    // templating system for default responses
-    let mut handlebars = Handlebars::new();
-    handlebars
-        .register_templates_directory(".html", "./backend/templates/")
-        .unwrap();
-
-    let data = web::Data::new(handlebars);
-
     HttpServer::new(move || {
         let logger = actix_web::middleware::Logger::default();
         App::new()
             .wrap(logger)
-            .app_data(data.clone())
+            // .app_data(data.clone())
             .service(
                 scope("/api")
                     .service(
