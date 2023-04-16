@@ -5,12 +5,15 @@ use actix_web::{web, App, HttpServer};
 
 use handlebars::Handlebars;
 
-// use diesel::prelude::*;
-// use diesel::PgConnection;
+use diesel::mysql::MysqlConnection;
+use diesel::prelude::*;
 
 mod routes;
 use routes::frontend;
 use routes::mobile;
+
+mod db;
+// use db::utils;
 
 pub async fn not_found(
     req: actix_web::HttpRequest,
@@ -29,19 +32,19 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
 
     // set DATABASE_URL and SERVER_PORT
-    let _database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    // let connection = PgConnection::establish(&database_url)
-    //     .expect(&format!("Error connecting to {}", database_url));
 
-    // create(&mut connection);
+    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+
+    let _db_connection =
+        MysqlConnection::establish(&database_url).expect("Error connecting to the database");
 
     let backend_port: u16 = env::var("BACKEND_PORT")
         .expect("BACKEND_PORT must be set")
         .parse()
         .expect("BACKEND_PORT must be a number");
 
+    // templating system for default responses
     let mut handlebars = Handlebars::new();
-
     handlebars
         .register_templates_directory(".html", "./backend/templates/")
         .unwrap();
