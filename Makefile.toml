@@ -30,6 +30,10 @@ args = ["serve", "--address", "0.0.0.0", "--dist", "./target/dist", "./frontend/
 command = "trunk"
 args = ["build", "--release", "--dist", "./dist", "./frontend/index.html"]
 
+[tasks.db-setup]
+command = "diesel"
+args = ["setup"]
+
 [tasks.db-migration]
 command = "diesel"
 args = ["migration", "run"]

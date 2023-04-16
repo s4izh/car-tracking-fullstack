@@ -8,10 +8,13 @@ Run docker and open a shell inside the backend container
   cargo make --profile dev backend-run # to run the backend listening on port 8080
 #+end_src
 
+*** MariaDB
+
 To also open a shell in the mariadb container run this command on another terminal:
 
 #+begin_src sh
   docker exec -ti mariadb /bin/bash
+  mysql -U db -prust
 #+end_src
 
 ** Testing a local deploy
