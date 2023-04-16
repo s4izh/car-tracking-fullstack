@@ -13,3 +13,10 @@ pub struct CarGeneralData {
     pub fuel_level: i32,
     pub fuel_consumption: i32,
 }
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
+#[serde(rename_all = "camelCase")]
+pub struct UserData {
+    pub matricula: i32,
+    pub main_user: i32,
+}
