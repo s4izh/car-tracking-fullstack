@@ -4,12 +4,12 @@ use actix_web::web::scope;
 use actix_web::{web, App, HttpServer};
 
 use diesel::mysql::MysqlConnection;
-use diesel::prelude::*;
+// use diesel::prelude::*;
 use diesel::r2d2::{ConnectionManager, Pool};
 
-mod routes;
-use routes::frontend;
-use routes::mobile;
+mod handlers;
+use handlers::frontend;
+use handlers::mobile;
 
 mod db;
 // use db::utils;
