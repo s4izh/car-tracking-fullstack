@@ -14,22 +14,9 @@ async fn get_data() -> impl Responder {
     HttpResponse::Ok()
 }
 
-#[derive(Deserialize, Serialize, Debug)]
-struct CarData {
-    matricula: i32,
-    speed: i32,
-    rpm: i32,
-    coolant_temp: i32,
-    oil_temp: i32,
-    throttle_pos: i32,
-    engine_load: i32,
-    fuel_level: i32,
-    fuel_consumption: i32,
-}
-
 #[get("/test")]
 async fn test() -> impl Responder {
-    let car_data = Json(CarData {
+    let car_data = Json(common::CarGeneralData {
         matricula: 9999,
         speed: 180,
         rpm: 3000,

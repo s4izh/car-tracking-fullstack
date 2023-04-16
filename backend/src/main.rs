@@ -3,10 +3,8 @@ use std::env;
 use actix_web::web::scope;
 use actix_web::{web, App, HttpServer};
 
-use handlebars::Handlebars;
-
 use diesel::mysql::MysqlConnection;
-// use diesel::prelude::*;
+use diesel::prelude::*;
 use diesel::r2d2::{ConnectionManager, Pool};
 
 mod routes;
@@ -26,10 +24,8 @@ async fn main() -> std::io::Result<()> {
 
     // set DATABASE_URL and SERVER_PORT
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    // let _db_connection =
-    //     MysqlConnection::establish(&database_url).expect("Error connecting to the database");
 
-    let _db_pool = {
+    let db_pool = {
         let manager: ConnectionManager<MysqlConnection> =
             ConnectionManager::<MysqlConnection>::new(&database_url);
         Pool::builder()
@@ -43,10 +39,12 @@ async fn main() -> std::io::Result<()> {
         .expect("BACKEND_PORT must be a number");
 
     HttpServer::new(move || {
+        // let _db_connection =
+        //     MysqlConnection::establish(&database_url).expect("Error connecting to the database");
         let logger = actix_web::middleware::Logger::default();
         App::new()
             .wrap(logger)
-            // .app_data(data.clone())
+            .app_data(db_pool.clone())
             .service(
                 scope("/api")
                     .service(
