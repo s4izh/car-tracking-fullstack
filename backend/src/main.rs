@@ -32,7 +32,6 @@ async fn main() -> std::io::Result<()> {
             .build(manager)
             .expect("Error building a connection pool")
     };
-
     let backend_port: u16 = env::var("BACKEND_PORT")
         .expect("BACKEND_PORT must be set")
         .parse()
