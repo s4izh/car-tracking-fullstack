@@ -14,3 +14,4 @@ handlebars = { version = "4.3.6", features = ["dir_source"] }
 common = { path = "../common" }
 diesel = { version = "2.0.0", features = ["mysql", "chrono"] }
 chrono = { version = "0.4.23", features = ["serde"] }
+actix-web-lab = { version = "0.19.1", features = ["spa"]}

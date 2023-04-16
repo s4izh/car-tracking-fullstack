@@ -61,7 +61,8 @@ async fn main() -> std::io::Result<()> {
                     .service(
                         scope("/frontend")
                             .service(frontend::index)
-                            .service(frontend::get_data),
+                            .service(frontend::get_data)
+                            .service(frontend::test),
                     )
                     .service(
                         scope("/mobile")
@@ -70,6 +71,13 @@ async fn main() -> std::io::Result<()> {
                     ),
             )
             .default_service(web::route().to(not_found))
+        // .service(
+        //     actix_web_lab::web::spa()
+        //         .index_file("./../../frontend/index.html")
+        //         .static_resources_mount("/")
+        //         // .static_resources_location
+        //         .finish(),
+        // )
     })
     .bind(("0.0.0.0", backend_port))?
     .run()

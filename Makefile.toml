@@ -1,4 +1,4 @@
-[env.docker]
+[env.dev]
 RUST_LOG="debug"
 #RUST_BACKTRACE="1"
 DATABASE_URL="${DATABASE_URL}"
