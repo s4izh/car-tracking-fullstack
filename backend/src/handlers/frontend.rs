@@ -18,6 +18,7 @@ async fn get_data() -> impl Responder {
 async fn test() -> impl Responder {
     let car_data = Json(common::CarGeneralData {
         matricula: 9999,
+        timestamp: 20230306,
         speed: 180,
         rpm: 3000,
         coolant_temp: 62,
