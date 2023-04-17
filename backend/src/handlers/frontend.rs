@@ -17,16 +17,17 @@ async fn get_data() -> impl Responder {
 #[get("/test")]
 async fn test() -> impl Responder {
     let car_data = Json(common::CarGeneralData {
-        matricula: 9999,
-        timestamp: 20230306,
+        matricula: "9999".to_string(),
+        timestamp: "20230306".to_string(),
+        trouble_codes: "".to_string(),
         speed: 180,
         rpm: 3000,
-        coolant_temp: 62,
-        oil_temp: 90,
-        throttle_pos: 15,
-        engine_load: 80,
-        fuel_level: 12,
-        fuel_consumption: 8,
+        throttle: 15.0,
+        engine_load: 80.0,
+        engine_coolant_temp: 62.0,
+        oil_temp: 90.0,
+        fuel_level: 12.0,
+        fuel_consumption: 8.0,
     });
     HttpResponse::Ok().json(car_data.into_inner())
 }

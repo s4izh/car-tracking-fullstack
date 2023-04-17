@@ -1,11 +1,11 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
-#[serde(rename_all = "camelCase")]
+// #[serde(rename_all = "camelCase")]
 pub struct CarGeneralData {
     pub matricula: String,
     pub timestamp: String,
-    pub trouble_codes: Vec<String>,
+    pub trouble_codes: String,
     pub speed: i32,
     pub rpm: i32,
     pub throttle: f32,
@@ -17,7 +17,7 @@ pub struct CarGeneralData {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
-#[serde(rename_all = "camelCase")]
+// #[serde(rename_all = "camelCase")]
 pub struct UserData {
     pub matricula: i32,
     pub main_user: i32,
