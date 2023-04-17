@@ -14,3 +14,4 @@ common = { path = "../common" }
 diesel = { version = "2.0.0", features = ["mysql", "r2d2", "chrono"] }
 chrono = { version = "0.4.23", features = ["serde"] }
 actix-web-lab = { version = "0.19.1", features = ["spa"]}
+actix-cors = "0.6.4"

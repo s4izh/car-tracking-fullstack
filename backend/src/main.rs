@@ -3,6 +3,8 @@ use std::env;
 use actix_web::web::scope;
 use actix_web::{web, App, HttpServer};
 
+use actix_cors::Cors;
+
 use diesel::mysql::MysqlConnection;
 // use diesel::prelude::*;
 use diesel::r2d2::{ConnectionManager, Pool};
@@ -43,6 +45,7 @@ async fn main() -> std::io::Result<()> {
         let logger = actix_web::middleware::Logger::default();
         App::new()
             .wrap(logger)
+            .wrap(Cors::permissive())
             .app_data(db_pool.clone())
             .service(
                 scope("/api")
