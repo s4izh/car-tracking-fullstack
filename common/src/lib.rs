@@ -3,16 +3,17 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct CarGeneralData {
-    pub matricula: i32,
-    pub timestamp: i32,
+    pub matricula: String,
+    pub timestamp: String,
+    pub trouble_codes: Vec<String>,
     pub speed: i32,
     pub rpm: i32,
-    pub coolant_temp: i32,
-    pub oil_temp: i32,
-    pub throttle_pos: i32,
-    pub engine_load: i32,
-    pub fuel_level: i32,
-    pub fuel_consumption: i32,
+    pub throttle f32,
+    pub engine_load f32,
+    pub engine_coolant_temp f32,
+    pub oil_temp f32, 
+    pub fuel_level f32,
+    pub fuel_consumption f32,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
