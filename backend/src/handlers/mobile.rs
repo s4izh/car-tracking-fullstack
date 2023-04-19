@@ -8,7 +8,15 @@ async fn index() -> impl Responder {
 }
 
 #[post("/send-data")]
-async fn send_data(car_data: Json<common::CarGeneralData>) -> impl Responder {
+async fn send_data(car_data: Json<common::CarGeneralData>, db: web::Data<Pool>) -> impl Responder {
+    // let conn = db.get().unwrap();
+    // let new_user = NewUser {
+    //     first_name: &item.first_name,
+    //     last_name: &item.last_name,
+    //     email: &item.email,
+    //     created_at: chrono::Local::now().naive_local(),
+    // };
+    // let res = insert_into(users).values(&new_user).get_result(&conn)?;
     HttpResponse::Ok().json(car_data.into_inner())
 }
 
