@@ -1,7 +1,7 @@
 #+title: Tests para los diferentes endpoint
 #+author: Sergio Sanz
 
-* /api/frontend/test
+* =/api/frontend/test=
 
 #+begin_src restclient
   GET http://localhost:8080/api/frontend/test
