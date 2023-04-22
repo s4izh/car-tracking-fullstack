@@ -1,7 +1,9 @@
 #+title: Tests para los diferentes endpoint
 #+author: Sergio Sanz
 
-* =/api/frontend/test=
+** Endpoints dedicados al frontend
+
+=/api/frontend/test=
 
 Endpoint para testear, devuelve el mismo =json= siempre
 
@@ -35,3 +37,5 @@ Endpoint para testear, devuelve el mismo =json= siempre
 // date: Sat, 22 Apr 2023 12:32:11 GMT
 // Request duration: 0.054588s
 #+END_SRC
+
+** Endpoints dedicados a la aplicación móvil
