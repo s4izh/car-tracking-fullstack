@@ -3,11 +3,16 @@
 
 * =/api/frontend/test=
 
+Endpoint para testear, devuelve el mismo =json= siempre
+
+#+name: /api/frontend/test
 #+begin_src restclient :exports
   GET http://localhost:8080/api/frontend/test
 #+end_src
 
-#+RESULTS:
+Resultados:
+
+#+RESULTS: /api/frontend/test
 #+BEGIN_SRC js
 {
   "matricula": "9999",
@@ -25,10 +30,10 @@
 // GET http://localhost:8080/api/frontend/test
 // HTTP/1.1 200 OK
 // content-length: 204
-// vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
 // content-type: application/json
 // access-control-allow-credentials: true
 // access-control-expose-headers: content-type
-// date: Sat, 22 Apr 2023 12:30:28 GMT
-// Request duration: 0.000903s
+// vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+// date: Sat, 22 Apr 2023 12:32:11 GMT
+// Request duration: 0.054588s
 #+END_SRC
