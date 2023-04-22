@@ -3,7 +3,7 @@
 
 * =/api/frontend/test=
 
-#+begin_src restclient
+#+begin_src restclient :results export
   GET http://localhost:8080/api/frontend/test
 #+end_src
 
@@ -26,9 +26,9 @@
 // HTTP/1.1 200 OK
 // content-length: 204
 // content-type: application/json
-// access-control-allow-credentials: true
 // access-control-expose-headers: content-type
+// access-control-allow-credentials: true
 // vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
-// date: Sat, 22 Apr 2023 12:20:40 GMT
-// Request duration: 0.051935s
+// date: Sat, 22 Apr 2023 12:24:35 GMT
+// Request duration: 0.052191s
 #+END_SRC
