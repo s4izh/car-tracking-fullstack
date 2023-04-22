@@ -1,5 +1,6 @@
 use actix_web::{get, post, web::Json, HttpResponse, Responder};
 
+use diesel::r2d2::Pool;
 // use serde::{Deserialize, Serialize};
 
 #[get("/")]
@@ -8,7 +9,8 @@ async fn index() -> impl Responder {
 }
 
 #[post("/send-data")]
-async fn send_data(car_data: Json<common::CarGeneralData>, db: web::Data<Pool>) -> impl Responder {
+async fn send_data(car_data: Json<common::CarGeneralData>) -> impl Responder {
+// async fn send_data(car_data: Json<common::CarGeneralData>, db: web::Data<Pool>) -> impl Responder {
     // let conn = db.get().unwrap();
     // let new_user = NewUser {
     //     first_name: &item.first_name,
