@@ -10,9 +10,7 @@ Endpoint para testear, devuelve el mismo =json= siempre
   GET http://localhost:8080/api/frontend/test
 #+end_src
 
-Resultados:
-
-#+RESULTS: /api/frontend/test
+#+name: /api/frontend/test
 #+BEGIN_SRC js
 {
   "matricula": "9999",
