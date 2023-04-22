@@ -7,7 +7,6 @@
   GET http://localhost:8080/api/frontend/test
 #+end_src
 
-#+RESULTS:
 #+BEGIN_SRC js
 {
   "matricula": "9999",
