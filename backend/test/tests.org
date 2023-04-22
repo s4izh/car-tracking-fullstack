@@ -1,10 +1,10 @@
-#+title: Endpoint testing
+#+title: Endpoints Documentation and Testing
 #+author: Sergio Sanz
 
-** Endpoints dedicados al frontend
+** Endpoints meant to be accessed from the frontend
 **** =/api/frontend/test=
 
-Endpoint para testear, devuelve el mismo =json= siempre
+Endpoint for testing, always returns the same =json=
 
 #+name: /api/frontend/test
 #+begin_src restclient :exports
@@ -38,4 +38,4 @@ Endpoint para testear, devuelve el mismo =json= siempre
 #+END_SRC
 
 
-** Endpoints dedicados a la aplicación móvil
+** Endpoints meant to be accessed from the mobile app
