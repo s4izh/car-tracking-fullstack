@@ -30,6 +30,7 @@ services:
     environment:
       - DATABASE_URL=mysql://db:db@mariadb/db
       - BACKEND_PORT=8080
+      - RUST_LOG=debug
       - CARGO_HOME=/app/.cargo
       - CARGO_TARGET_DIR=/app/target
     build:
