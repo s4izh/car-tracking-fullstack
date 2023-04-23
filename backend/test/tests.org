@@ -37,24 +37,5 @@ Endpoint for testing, always returns the same =json=
 // Request duration: 0.054588s
 #+END_SRC
 
-Curl example:
-
-#+begin_src sh :exports :results code
-  curl -i http://localhost:8080/api/frontend/test
-#+end_src
-
-#+RESULTS:
-#+begin_src sh
-HTTP/1.1 200 OK
-content-length: 204
-vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
-access-control-allow-credentials: true
-content-type: application/json
-access-control-expose-headers: content-type
-date: Sun, 23 Apr 2023 20:26:31 GMT
-
-{"matricula":"9999","timestamp":"20230306","trouble_codes":"","speed":180,"rpm":3000,"throttle":15.0,"engine_load":80.0,"engine_coolant_temp":62.0,"oil_temp":90.0,"fuel_level":12.0,"fuel_consumption":8.0}
-#+end_src
-
 
 ** Endpoints meant to be accessed from the mobile app
