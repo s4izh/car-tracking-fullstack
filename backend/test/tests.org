@@ -11,7 +11,7 @@ Endpoint for testing, always returns the same =json=
   GET http://localhost:8080/api/frontend/test
 #+end_src
 
-#+name: /api/frontend/test
+#+RESULTS: /api/frontend/test
 #+BEGIN_SRC js
 {
   "matricula": "9999",
@@ -29,12 +29,12 @@ Endpoint for testing, always returns the same =json=
 // GET http://localhost:8080/api/frontend/test
 // HTTP/1.1 200 OK
 // content-length: 204
-// content-type: application/json
 // access-control-allow-credentials: true
-// access-control-expose-headers: content-type
 // vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
-// date: Sat, 22 Apr 2023 12:32:11 GMT
-// Request duration: 0.054588s
+// content-type: application/json
+// access-control-expose-headers: content-type
+// date: Sun, 23 Apr 2023 20:31:39 GMT
+// Request duration: 0.078258s
 #+END_SRC
 
 
