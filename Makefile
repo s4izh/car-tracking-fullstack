@@ -25,5 +25,8 @@ db-redo:
 docker-dev:
 	docker-compose run --service-ports backend
 
+docker-down:
+	docker-compose down --remove-orphans
+
 docker-deploy:
 	docker-compose run --service-ports backend make deploy
