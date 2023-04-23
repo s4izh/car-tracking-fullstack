@@ -17,6 +17,15 @@ To also open a shell in the mariadb container run this command on another termin
   mysql -U db -prust
 #+end_src
 
+*** Exit
+
+To exit and close everything
+
+#+begin_src sh
+  exit
+  make docker-down
+#+end_src
+
 ** Testing a local deploy
 
 #+begin_src sh
