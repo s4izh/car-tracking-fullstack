@@ -5,11 +5,11 @@ help:
 	| sort \
 	| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-dev: ## run the backend in a dev environment
+dev: ## run the backend in a dev environment (run inside the container)
 	# cargo watch -x run -p backend
 	cargo run -p backend
 
-deploy: ## deploy the backend
+deploy: ## deploy the backend (run inside the container)
 	cargo build --release -p backend
 	cargo run -p backend
 
@@ -19,7 +19,7 @@ frontend-run: ## run the frontend
 frontend-build:
 	trunk build --release --dist ./dist ./frontend/index.html
 
-db-setup: ## setup the db with diesel
+db-setup: ## setup the db with diesel (run inside the container)
 	diesel setup
 
 db-migration:
