@@ -53,7 +53,8 @@ async fn main() -> std::io::Result<()> {
                         scope("/frontend")
                             .service(frontend::index)
                             .service(frontend::get_data)
-                            .service(frontend::test),
+                            .service(frontend::test)
+                            .service(frontend::certificate),
                     )
                     .service(
                         scope("/mobile")

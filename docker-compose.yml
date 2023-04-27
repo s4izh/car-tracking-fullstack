@@ -21,7 +21,22 @@ services:
       interval: 5s
       timeout: 10s
       retries: 3
-
+  blockchain-client:
+    container_name: blockchain-client
+    # stdin_open: true
+    # tty: true
+    build:
+      context: blockchain-client
+    working_dir: /app/blockchain-client
+    volumes:
+      - ".:/app"
+    environment:
+      - BLOCKCHAIN_URL=localhost:3000
+    ports:
+      - 5000:5000
+    expose:
+      - 5000
+    command: python app.py
   backend:
     container_name: pti-rust-backend
     # image: rust:latest
@@ -30,6 +45,7 @@ services:
     environment:
       - DATABASE_URL=mysql://db:db@mariadb/db
       - BACKEND_PORT=8080
+      - BLOCKCHAIN_CLIENT_URL=http://blockchain-client:5000
       - RUST_LOG=debug
       - CARGO_HOME=/app/.cargo
       - CARGO_TARGET_DIR=/app/target
