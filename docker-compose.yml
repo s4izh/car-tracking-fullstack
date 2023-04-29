@@ -21,20 +21,22 @@ services:
       interval: 5s
       timeout: 10s
       retries: 3
-  # blockchain:
-  #   container_name: blockchain
-  #   stdin_open: true
-  #   tty: true
-  #   build:
-  #     context: blockchain
-  #   working_dir: /app/blockchain
-  #   volumes:
-  #     - ".:/app"
-  #   ports:
-  #     - 3000:8090
-  #   expose:
-  #     - 3000
-  #     - 7545
+
+  truffle:
+    container_name: truffle
+    stdin_open: true
+    tty: true
+    build:
+      context: blockchain
+    volumes:
+      - .:/app
+    expose:
+      - 7545
+      - 8545
+    ports:
+      - 7545:7545
+      - 3000:8081
+
   blockchain-client:
     container_name: blockchain-client
     stdin_open: true
@@ -51,32 +53,12 @@ services:
     expose:
       - 5000
     command: python app.py
+
   backend:
     container_name: pti-rust-backend
     # image: rust:latest
     stdin_open: true
-    tty: true
-    environment:
-      - DATABASE_URL=mysql://db:db@mariadb/db
-      - BACKEND_PORT=8080
-      - BLOCKCHAIN_CLIENT_URL=http://blockchain-client:5000
-      - RUST_LOG=debug
-      - CARGO_HOME=/app/.cargo
-      - CARGO_TARGET_DIR=/app/target
-    build:
-      context: backend
-    working_dir: /app
-    volumes:
-      - ".:/app"
-      - "cargo:/app/.cargo"
-      - "target:/app/target"
-    ports:
-      - 8080:8080
-    depends_on:
-      # - mariadb
-      mariadb:
-        condition: service_healthy
-    # command: cargo make --profile docker backend-run
+
 
 volumes:
   db-data:
