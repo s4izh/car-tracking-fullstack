@@ -21,17 +21,31 @@ services:
       interval: 5s
       timeout: 10s
       retries: 3
+  # blockchain:
+  #   container_name: blockchain
+  #   stdin_open: true
+  #   tty: true
+  #   build:
+  #     context: blockchain
+  #   working_dir: /app/blockchain
+  #   volumes:
+  #     - ".:/app"
+  #   ports:
+  #     - 3000:8090
+  #   expose:
+  #     - 3000
+  #     - 7545
   blockchain-client:
     container_name: blockchain-client
-    # stdin_open: true
-    # tty: true
+    stdin_open: true
+    tty: true
     build:
       context: blockchain-client
     working_dir: /app/blockchain-client
     volumes:
       - ".:/app"
     environment:
-      - BLOCKCHAIN_URL=localhost:3000
+      - BLOCKCHAIN_URL=http://blockchain:7545
     ports:
       - 5000:5000
     expose:

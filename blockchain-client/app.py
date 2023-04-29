@@ -5,31 +5,24 @@ import web3
 
 app = Flask(__name__)
 
-w3 = web3.Web3()
-myAccount = w3.eth.account.create('entropia que te cagas')
-myAddress = myAccount.address
-myPrivateKey = myAccount._private_key
-print('my address is     : {}'.format(myAccount.address))
-print('my private key is : {}'.format(myPrivateKey.hex()))
+# w3 = web3.Web3()
+# myAccount = w3.eth.account.create('entropia que te cagas')
+# myAddress = myAccount.address
+# myPrivateKey = myAccount._private_key
+
+# print('my address is     : {}'.format(myAddress))
+# print('my private key is : {}'.format(myPrivateKey))
+
+# web3 = web3.Web3(web3.HTTPProvider(blockchain_url))
+
+# blockchain_url = os.environ['BLOCKCHAIN_URL']
+# my_contract_abi = os.environ['ABI']
+# my_contract_address = os.environ['ADDRESS']
+# my_contract = web3.eth.contract(address=my_contract_address, abi=my_contract_abi)
 
 
-def send_certificate_request(matricula, km):
-    session = requests.Session()  # as defined in https://github.com/ethereum/wiki/wiki/JSON-RPC#net_version
-    method = 'net_version'
-    params = []
-    payload= {"jsonrpc": "2.0",
-              "method": method,
-              "params": params,
-              "id": 1}
-    headers = {'Content-type': 'application/json'}
-
-    # poner la dirección de entorno en el docker-compose
-    blockchain_url = os.environ['BLOCKCHAIN_URL']
-
-    # response = session.post(blockchain_url,  # dirección de la blockchain
-    #                         json=payload, headers=headers)
-    # print('raw json response: {}'.format(response.json()))
-    # print('network id: {}'.format(response.json()['result']))
+# def send_certificate_request(matricula, km):
+#     certificate = my_contract.functions.certifyKilometer(matricula, km).call()
 
 
 @app.route('/')
@@ -42,7 +35,7 @@ def index():
 def certificate_handler():
     matricula = request.args.get('matricula', type=str)
     km = request.args.get('km', type=int)
-    send_certificate_request(matricula, km)
+    # send_certificate_request(matricula, km)
     return 'certification completed', 200
 
 
