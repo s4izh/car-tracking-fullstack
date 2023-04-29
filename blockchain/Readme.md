@@ -1,5 +1,8 @@
 Para testear que todo funciona correctamente, puedes seguir los siguientes pasos:
-Inicia ganache-cli “./ganache…”.
+
+-Inicia ganache-cli “./ganache…”.
+
+-Ejecuta truffle compile para compilar los contratos.
 
 -En una terminal, desde la raíz del proyecto, ejecuta truffle migrate --reset para desplegar los contratos en la red local.
 

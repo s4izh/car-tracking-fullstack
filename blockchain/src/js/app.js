@@ -32,6 +32,7 @@ var App = {
   //HACER CONSULTA
   bindEvents: function() {
     $(document).on('click', '#submitBtn', App.handleRequest);
+    $(document).on('click', '#certificationBtn', App.handleCertification);
   },
 
   handleRequest: function(event) {
@@ -66,15 +67,11 @@ var App = {
     });
   },
 
-  //HANDLER CERTIFICACION
- /*bindEvents: function() {
-    $(document).on('click', '#certificationBtn', App.handleCertification);
-  },
-
   handleCertification: function(event) {
     event.preventDefault();
 
     var mileage = parseInt($(event.target).data('actualMileage'));
+    var licensePlateInput = document.getElementById("licensePlateInput");
 
     var certificationInstance;
 
@@ -89,13 +86,13 @@ var App = {
         certificationInstance = instance;
 
         // Execute certification as a transaction by sending account
-        certificationInstance.certifyKilometer(mileage, {from: account});
+        return certificationInstance.certifyKilometer(mileage, licensePlateInput, {from: account});
       }).catch(function(err) {
         console.log(err.message);
       });
     });
 
-  }*/
+  }
 
 };
 
