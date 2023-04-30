@@ -38,20 +38,17 @@ frontend-build:
 
 frontend-deploy: frontend-build frontend-run
 
-# db-setup: ## setup the db with diesel (run inside the container)
-# 	diesel setup
-
 db-setup:
 	docker exec -ti backend diesel database setup
 
-db-reset: ## reset the db (run inside the container)
-	diesel database reset
+db-reset:
+	docker exec -ti backend diesel database reset
 
 db-migration:
-	diesel migration run
+	docker exec -ti backend diesel migration run
 
 db-redo:
-	diesel migration redo
+	docker exec -ti diesel migration redo
 
 docker-dev: ## run docker and attach to a shell in the backend container
 	docker-compose run --service-ports backend
