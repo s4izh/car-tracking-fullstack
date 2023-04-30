@@ -19,22 +19,17 @@ use yewdux::prelude::*;
 
 struct RegisterUserSchema {
     #[validate(length(min = 1, message = "Name is required"))]
-    name: String,
-    #[validate(
-        length(min = 1, message = "Email is required"),
-        email(message = "Email is invalid")
-    )]
-    email: String,
+    matricula: String,
     #[validate(
         length(min = 1, message = "Password is required"),
         length(min = 6, message = "Password must be at least 6 characters")
     )]
-    password: String,
+    hash: String,
     #[validate(
         length(min = 1, message = "Please confirm your password"),
-        must_match(other = "password", message = "Passwords do not match")
+        must_match(other = "hash", message = "Passwords do not match")
     )]
-    password_confirm: String,
+    hash_confirm: String,
 }
 
 fn get_input_callback(
@@ -44,10 +39,9 @@ fn get_input_callback(
     Callback::from(move |value| {
         let mut data = cloned_form.deref().clone();
         match name {
-            "name" => data.name = value,
-            "email" => data.email = value,
-            "password" => data.password = value,
-            "password_confirm" => data.password_confirm = value,
+            "name" => data.matricula = value,
+            "password" => data.hash = value,
+            "password_confirm" => data.hash_confirm= value,
             _ => (),
         }
         cloned_form.set(data);
@@ -62,7 +56,6 @@ pub fn register_page() -> Html {
     let navigator = use_navigator().unwrap();
 
     let name_input_ref = NodeRef::default();
-    let email_input_ref = NodeRef::default();
     let password_input_ref = NodeRef::default();
     let password_confirm_input_ref = NodeRef::default();
 
@@ -72,8 +65,7 @@ pub fn register_page() -> Html {
         Callback::from(move |(name, value): (String, String)| {
             let mut data = cloned_form.deref().clone();
             match name.as_str() {
-                "email" => data.email = value,
-                "password" => data.password = value,
+                "password" => data.hash = value,
                 _ => (),
             }
             cloned_form.set(data);
@@ -104,7 +96,6 @@ pub fn register_page() -> Html {
     };
 
     let handle_name_input = get_input_callback("name", form.clone());
-    let handle_email_input = get_input_callback("email", form.clone());
     let handle_password_input = get_input_callback("password", form.clone());
     let handle_password_confirm_input = get_input_callback("password_confirm", form.clone());
 
@@ -115,7 +106,6 @@ pub fn register_page() -> Html {
         let cloned_dispatch = dispatch.clone();
 
         let cloned_name_input_ref = name_input_ref.clone();
-        let cloned_email_input_ref = email_input_ref.clone();
         let cloned_password_input_ref = password_input_ref.clone();
         let cloned_password_confirm_input_ref = password_confirm_input_ref.clone();
 
@@ -126,7 +116,6 @@ pub fn register_page() -> Html {
             let dispatch = cloned_dispatch.clone();
 
             let name_input_ref = cloned_name_input_ref.clone();
-            let email_input_ref = cloned_email_input_ref.clone();
             let password_input_ref = cloned_password_input_ref.clone();
             let password_confirm_input_ref = cloned_password_confirm_input_ref.clone();
 
@@ -139,14 +128,12 @@ pub fn register_page() -> Html {
                         set_page_loading(true, dispatch.clone());
 
                         let name_input = name_input_ref.cast::<HtmlInputElement>().unwrap();
-                        let email_input = email_input_ref.cast::<HtmlInputElement>().unwrap();
                         let password_input = password_input_ref.cast::<HtmlInputElement>().unwrap();
                         let password_confirm_input = password_confirm_input_ref
                             .cast::<HtmlInputElement>()
                             .unwrap();
 
                         name_input.set_value("");
-                        email_input.set_value("");
                         password_input.set_value("");
                         password_confirm_input.set_value("");
 
@@ -178,7 +165,7 @@ pub fn register_page() -> Html {
     <section class="py-8 bg-ct-blue-600 min-h-screen grid place-items-center">
       <div class="w-full">
         <h1 class="text-4xl xl:text-6xl text-center font-[600] text-ct-yellow-600 mb-4">
-         {" Welcome to CodevoWeb!"}
+         {" Welcome to Car Tracking!"}
         </h1>
         <h2 class="text-lg text-center mb-4 text-ct-dark-200">
           {"Sign Up To Get Started!"}
@@ -187,8 +174,7 @@ pub fn register_page() -> Html {
             onsubmit={on_submit}
             class="max-w-md w-full mx-auto overflow-hidden shadow-lg bg-ct-dark-200 rounded-2xl p-8 space-y-5"
           >
-            <FormInput label="Full Name" name="name" input_ref={name_input_ref} handle_onchange={handle_name_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
-            <FormInput label="Email" name="email" input_type="email" input_ref={email_input_ref} handle_onchange={handle_email_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
+            <FormInput label="Plate" name="name" input_ref={name_input_ref} handle_onchange={handle_name_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
             <FormInput label="Password" name="password" input_type="password" input_ref={password_input_ref} handle_onchange={handle_password_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
             <FormInput
               label="Confirm Password"

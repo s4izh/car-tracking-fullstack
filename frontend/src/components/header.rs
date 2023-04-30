@@ -44,7 +44,7 @@ pub fn header_component() -> Html {
       <header class="bg-white h-20">
       <nav class="h-full flex justify-between container items-center">
         <div>
-          <Link<Route> to={Route::HomePage} classes="text-ct-dark-600">{"CarAnalyzer"}</Link<Route>>
+          <Link<Route> to={Route::HomePage} classes="text-ct-dark-600">{"Car Tracking"}</Link<Route>>
         </div>
         <ul class="flex items-center gap-4">
           <li>

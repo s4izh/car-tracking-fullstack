@@ -1,6 +1,7 @@
 use super::types::{ErrorResponse, User, UserLoginResponse, UserResponse, CarGeneralData};
 use reqwasm::http;
 use gloo::console;
+use serde_json::Value;
 
 
 // Devuelve un Result ocn un JSONResponse o un String 
@@ -41,8 +42,8 @@ pub async fn api_car() -> Result<CarGeneralData, String> {
     
 
 
-pub async fn api_register_user(user_data: &str) -> Result<User, String> {
-    let response = match http::Request::post("http://localhost:8000/api/auth/register")
+pub async fn api_register_user(user_data: &str) -> Result<serde_json::Value, String> {
+    let response = match http::Request::post("http://localhost:8080/api/create-user")
         .header("Content-Type", "application/json")
         .body(user_data)
         .send()
@@ -61,9 +62,9 @@ pub async fn api_register_user(user_data: &str) -> Result<User, String> {
         }
     }
 
-    let res_json = response.json::<UserResponse>().await;
+    let res_json = response.json().await;
     match res_json {
-        Ok(data) => Ok(data.data.user),
+        Ok(data) => Ok(data),
         Err(_) => Err("Failed to parse response".to_string()),
     }
 }

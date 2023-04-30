@@ -20,6 +20,12 @@ pub struct UserData {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
+pub struct UserData2 {
+    pub matricula: String,
+    pub hash: String,
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CarGeneralData {
     pub timestamp: String,
     pub speed: i32,
