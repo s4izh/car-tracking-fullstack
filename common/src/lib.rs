@@ -32,3 +32,12 @@ pub struct UserData {
     pub matricula: String,
     pub hash: String,
 }
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
+pub struct UserMainInfo {
+    pub total_km: i32,
+    pub trip: i32, // número de viajes
+    pub date_created: chrono::NaiveDateTime,
+}
+
+
