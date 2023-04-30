@@ -5,9 +5,13 @@ use diesel::r2d2::ConnectionManager;
 use diesel::MysqlConnection;
 use diesel::RunQueryDsl;
 use diesel::QueryDsl;
+use diesel::ExpressionMethods;
 use crate::db::schema::users::dsl::users;
 use crate::db::models;
 use crate::db::schema;
+
+use crate::db::models::BdUser;
+use crate::db::schema::users::{matricula, hash};
 
 #[get("/")]
 async fn index() -> impl Responder {
@@ -42,7 +46,7 @@ async fn certificate(
     pool: web::Data<Pool<ConnectionManager<MysqlConnection>>>,
 ) -> Result<HttpResponse, actix_web::Error> {
 
-    let conn = pool.get().expect("couldn't get db connection from pool");
+    let mut conn = pool.get().expect("couldn't get db connection from pool");
 
     // verificar usuario
 
@@ -51,10 +55,10 @@ async fn certificate(
         .filter(hash.eq(&user.hash))
         .first::<BdUser>(&mut *conn);
     match result {
-        Err(diesel::NotFound) => return HttpResponse::BadRequest().body("User doesn't exists or bad password"),
+        Err(diesel::NotFound) => return Ok(HttpResponse::BadRequest().body("User doesn't exists or bad password")),
         Ok(_) => (),
-        Err(_) => return HttpResponse::InternalServerError()
-            .body(format!("Error finding user")),
+        Err(_) => return Ok(HttpResponse::InternalServerError()
+            .body(format!("Error finding user"))),
     }
 
     // ------
@@ -67,11 +71,11 @@ async fn certificate(
 
     let blockchain_client_url = std::env::var("BLOCKCHAIN_CLIENT_URL").expect("BLOCKCHAIN_CLIENT_URL must be set");
 
-    let matricula = 0;
-    let km = 1000;
+    let mat = 0;
+    let k = 1000;
 
     let url = format!("{}/certificate?matricula={}&km={}", 
-                      blockchain_client_url, matricula, km);
+                      blockchain_client_url, mat, k);
 
     let response = reqwest::get(&url).await.map_err(|e| {
         // convert reqwest::Error into actix_web::Error
