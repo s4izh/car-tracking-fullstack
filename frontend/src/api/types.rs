@@ -20,9 +20,7 @@ pub struct UserData {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
-// #[serde(rename_all = "camelCase")]
 pub struct CarGeneralData {
-    pub matricula: String,
     pub timestamp: String,
     pub trouble_codes: String,
     pub speed: i32,
@@ -30,11 +28,10 @@ pub struct CarGeneralData {
     pub throttle: f32,
     pub engine_load: f32,
     pub engine_coolant_temp: f32,
-    pub oil_temp: f32, 
+    pub oil_temp: f32,
     pub fuel_level: f32,
     pub fuel_consumption: f32,
 }
-
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UserResponse {
     pub status: String,

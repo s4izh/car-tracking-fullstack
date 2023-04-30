@@ -41,7 +41,6 @@ pub fn car_page() -> Html {
               <p class="text-5xl font-semibold">{"Car Engine Info"}</p>
               if let Some(info) = info {
                 <div class="mt-8">
-                  <p class="mb-4">{format!("Matricula: {}",info.matricula )}</p>
                   <p class="mb-4">{format!("Timestap: {}", info.timestamp)}</p>
                   <p class="mb-4">{format!("Velocidad: {}", info.speed)}</p>
                   <p class="mb-4">{format!("Codigos de error: {}", info.trouble_codes)}</p>

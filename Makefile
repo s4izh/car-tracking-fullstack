@@ -29,7 +29,7 @@ deploy: ## deploy the backend (run inside the container)
 	cargo run -p backend
 
 frontend-run: ## run the frontend (run inside the container)
-	trunk serve --address 0.0.0.0 --dist ./target/dist ./frontend/index.html --port 3000
+	cd frontend && trunk serve --address 0.0.0.0 --port 3000
 
 frontend-build:
 	trunk build --release --dist ./dist ./frontend/index.html
