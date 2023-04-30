@@ -1,11 +1,12 @@
 {
-  "matricula": 666,
+  "timestamp": "0",
+  "trouble_codes": "00000",
   "speed": 180,
   "rpm": 7000,
-  "coolant_temp": 0,
-  "oil_temp": 0,
-  "throttle_pos": 0,
-  "engine_load": 0,
-  "fuel_level": 0,
-  "fuel_consumption": 0
+  "throttle": 0.5,
+  "engine_load": 15.5,
+  "engine_coolant_temp": 17.2,
+  "oil_temp": 15.5,
+  "fuel_level": 16.7,
+  "fuel_consumption": 12.2
 }

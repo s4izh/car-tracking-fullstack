@@ -1,0 +1,4 @@
+#!/bin/sh
+
+curl -i -X POST -H "Content-Type: application/json" \
+  -d @data.json http://localhost:8080/api/mobile/send-data 
