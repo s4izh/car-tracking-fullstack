@@ -38,4 +38,10 @@ Endpoint for testing, always returns the same =json=
 #+END_SRC
 
 
+**** =/api/frontend/create-user=
+#+name: /api/frontend/test
+#+begin_src sh
+  curl http://localhost:8080/api/frontend/create-user
+#+end_src
+
 ** Endpoints meant to be accessed from the mobile app

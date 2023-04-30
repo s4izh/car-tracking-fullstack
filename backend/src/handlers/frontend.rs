@@ -1,5 +1,22 @@
-use actix_web::{get, web::Json, HttpResponse, Responder, error};
+use actix_web::{get, post, web, web::Json, HttpResponse, Responder, error};
 
+use diesel::r2d2::Pool;
+use diesel::r2d2::ConnectionManager;
+use diesel::MysqlConnection;
+use diesel::RunQueryDsl;
+
+use diesel::QueryDsl;
+// use diesel::query_dsl::methods::FilterDsl;
+// use std::iter::Iterator;
+
+
+use crate::db::schema::users::dsl::users;
+
+// mod db;
+use crate::db::models;
+use crate::db::schema;
+
+// type DbPool = Pool<ConnectionManager<MysqlConnection>>;
 
 // use serde::{Deserialize, Serialize};
 
@@ -19,7 +36,7 @@ async fn get_data() -> impl Responder {
 #[get("/test")]
 async fn test() -> impl Responder {
     let car_data = Json(common::CarGeneralData {
-        matricula: "9999".to_string(),
+        // matricula: "9999".to_string(),
         timestamp: "20230306".to_string(),
         trouble_codes: "".to_string(),
         speed: 180,
@@ -35,11 +52,34 @@ async fn test() -> impl Responder {
 }
 
 #[get("/certificate")]
-async fn certificate() -> Result<HttpResponse, actix_web::Error> {
+// async fn certificate(pool: web::Data<DbPool>) -> Result<HttpResponse, actix_web::Error> {
+// async fn certificate() -> Result<HttpResponse, actix_web::Error> {
+async fn certificate(
+    // user: web::Json<common::UserData>,
+    pool: web::Data<Pool<ConnectionManager<MysqlConnection>>>,
+) -> Result<HttpResponse, actix_web::Error> {
+
+    let conn = pool.get().expect("couldn't get db connection from pool");
 
     // verificar usuario
 
     // ------
+
+    // let user = users
+    //     .filter(matricula.eq(&data.matricula))
+    //     .first::<User>(&conn)
+    //     .optional()
+    //     .expect("Error querying for user");
+
+    // if let Some(user) = user {
+    //     if user.hash == data.hash {
+    //         Ok(HttpResponse::Ok().json(json!({"message": "User exists and hash matches"})))
+    //     } else {
+    //         Ok(HttpResponse::BadRequest().json(json!({"message": "Hash does not match"})))
+    //     }
+    // } else {
+    //     Ok(HttpResponse::NotFound().json(json!({"message": "User not found"})))
+    // }
 
     // conseguir kilometraje
 
@@ -65,4 +105,37 @@ async fn certificate() -> Result<HttpResponse, actix_web::Error> {
     })?;
     println!("{}", body);
     Ok(HttpResponse::Ok().body(body))
+}
+
+// #[get("/login")]
+
+use chrono::Utc;
+
+// #[get("/create-user")]
+#[post("/create-user")]
+async fn create_user(
+    user: Json<common::UserData>,
+    pool: web::Data<Pool<ConnectionManager<MysqlConnection>>>
+) -> impl Responder {
+
+    let user = common::UserData {
+        matricula: "9999".to_string(),
+        hash: "1234".to_string(),
+    };
+
+    let new_user = models::NewBdUser {
+        matricula: &user.matricula,
+        hash: &user.hash,
+    };
+
+    let mut conn = pool.get().expect("couldn't get db connection from pool");
+
+    diesel::insert_into(users)
+        .values(&new_user)
+        // .get_result(&mut *conn)
+        .execute(&mut *conn)
+        .map_err(|e| HttpResponse::InternalServerError()
+                 .body(format!("Error inserting user: {:?}", e)));
+
+    HttpResponse::Ok().json(user)
 }

@@ -46,7 +46,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .wrap(logger)
             .wrap(Cors::permissive())
-            .app_data(db_pool.clone())
+            .app_data(web::Data::new(db_pool.clone()))
             .service(
                 scope("/api")
                     .service(
@@ -54,7 +54,8 @@ async fn main() -> std::io::Result<()> {
                             .service(frontend::index)
                             .service(frontend::get_data)
                             .service(frontend::test)
-                            .service(frontend::certificate),
+                            .service(frontend::certificate)
+                            .service(frontend::create_user),
                     )
                     .service(
                         scope("/mobile")

@@ -22,20 +22,20 @@ services:
       timeout: 10s
       retries: 3
 
-  truffle:
-    container_name: truffle
-    stdin_open: true
-    tty: true
-    build:
-      context: blockchain
-    volumes:
-      - .:/app
-    expose:
-      - 7545
-      - 8545
-    ports:
-      - 7545:7545
-      - 3000:8081
+  # truffle:
+  #   container_name: truffle
+  #   stdin_open: true
+  #   tty: true
+  #   build:
+  #     context: blockchain
+  #   volumes:
+  #     - .:/app
+  #   expose:
+  #     - 7545
+  #     - 8545
+  #   ports:
+  #     - 7545:7545
+  #     - 3000:8081
 
   blockchain-client:
     container_name: blockchain-client
@@ -46,8 +46,8 @@ services:
     working_dir: /app/blockchain-client
     volumes:
       - ".:/app"
-    environment:
-      - BLOCKCHAIN_URL=http://blockchain:7545
+    # environment:
+    #   - BLOCKCHAIN_URL=http://blockchain:7545
     ports:
       - 5000:5000
     expose:
@@ -56,7 +56,6 @@ services:
 
   backend:
     container_name: pti-rust-backend
-    # image: rust:latest
     stdin_open: true
     tty: true
     environment:

@@ -34,6 +34,9 @@ frontend-build:
 db-setup: ## setup the db with diesel (run inside the container)
 	diesel setup
 
+db-reset: ## reset the db (run inside the container)
+	diesel database reset
+
 db-migration:
 	diesel migration run
 
