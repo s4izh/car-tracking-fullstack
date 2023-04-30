@@ -11,11 +11,11 @@ pub struct TripData {
     pub fuel_percentage: f64, // fuel %
     pub duration: i32, // seconds
     pub trouble_codes: String,
-    pub data: Vec<CarGeneralData>,
+    pub data: Vec<CarData>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
-pub struct CarGeneralData {
+pub struct CarData {
     pub timestamp: String,
     pub speed: i32,
     pub rpm: i32,

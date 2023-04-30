@@ -60,7 +60,10 @@ async fn main() -> std::io::Result<()> {
                     .service(
                         scope("/mobile")
                             .service(mobile::index)
-                            .service(mobile::send_data),
+                            .service(mobile::send_data)
+                            .service(mobile::trip)
+                            .service(mobile::login)
+                            .service(mobile::create_user),
                     ),
             )
             .default_service(web::route().to(not_found))

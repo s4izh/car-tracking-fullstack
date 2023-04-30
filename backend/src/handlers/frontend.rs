@@ -4,20 +4,10 @@ use diesel::r2d2::Pool;
 use diesel::r2d2::ConnectionManager;
 use diesel::MysqlConnection;
 use diesel::RunQueryDsl;
-
 use diesel::QueryDsl;
-// use diesel::query_dsl::methods::FilterDsl;
-// use std::iter::Iterator;
-
-
 use crate::db::schema::users::dsl::users;
-
-// mod db;
 use crate::db::models;
 use crate::db::schema;
-
-// type DbPool = Pool<ConnectionManager<MysqlConnection>>;
-
 // use serde::{Deserialize, Serialize};
 
 #[get("/")]
@@ -35,7 +25,7 @@ async fn get_data() -> impl Responder {
 
 #[get("/test")]
 async fn test() -> impl Responder {
-    let car_data = Json(common::CarGeneralData {
+    let car_data = Json(common::CarData {
         // matricula: "9999".to_string(),
         timestamp: "20230306".to_string(),
         speed: 180,
