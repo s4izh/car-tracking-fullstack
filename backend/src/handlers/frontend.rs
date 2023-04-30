@@ -38,7 +38,6 @@ async fn test() -> impl Responder {
     let car_data = Json(common::CarGeneralData {
         // matricula: "9999".to_string(),
         timestamp: "20230306".to_string(),
-        trouble_codes: "".to_string(),
         speed: 180,
         rpm: 3000,
         throttle: 15.0,

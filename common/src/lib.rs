@@ -1,20 +1,22 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
-pub struct CarData {
+pub struct TripData {
     pub matricula: String,
     pub hash: String,
-    pub km: i32,
-    pub max_speed: i32,
-    pub speed_average: f64,
-    pub duration: i32,
+    pub trip: i32, // numero
+    pub km: i32, // km
+    pub max_speed: i32, // km/h
+    pub speed_average: f64, // km/h
+    pub fuel_percentage: f64, // fuel %
+    pub duration: i32, // seconds
+    pub trouble_codes: String,
     pub data: Vec<CarGeneralData>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CarGeneralData {
     pub timestamp: String,
-    pub trouble_codes: String,
     pub speed: i32,
     pub rpm: i32,
     pub throttle: f32,

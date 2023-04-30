@@ -6,6 +6,7 @@ diesel::table! {
         matricula -> Varchar,
         hash -> Varchar,
         total_km -> Integer,
+        trip -> Integer,
         date_created -> Timestamp,
     }
 }

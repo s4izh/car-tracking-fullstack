@@ -11,6 +11,7 @@ pub struct BdUser {
     pub matricula: String,
     pub hash: String,
     pub total_km: i32,
+    pub trip: i32,
     pub date_created: NaiveDateTime,
 }
 

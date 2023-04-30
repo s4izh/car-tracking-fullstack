@@ -4,6 +4,7 @@ CREATE TABLE users (
     matricula       VARCHAR(255)    NOT NULL UNIQUE,
     hash            VARCHAR(255)    NOT NULL,
     total_km        INT             NOT NULL DEFAULT 0,
+    trip	    INT		    NOT NULL DEFAULT 0,
     date_created    TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     PRIMARY KEY (id)
