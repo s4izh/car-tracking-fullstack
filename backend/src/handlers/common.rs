@@ -32,9 +32,6 @@ async fn login(
             .body(format!("Error finding user")),
     }
 
-    // let trip_num = 0;
-
-    // HttpResponse::Ok().body(format!("{}",trip_num))
     HttpResponse::Ok().body("Login successful")
 }
 
@@ -62,7 +59,6 @@ async fn create_user(
 
     diesel::insert_into(users)
         .values(&new_user)
-        // .get_result(&mut *conn)
         .execute(&mut *conn)
         .map_err(|e| HttpResponse::InternalServerError()
                  .body(format!("Error inserting user: {:?}", e)));
