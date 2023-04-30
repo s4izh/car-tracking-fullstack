@@ -4,6 +4,7 @@
 Run docker and open a shell inside the backend container
 
 #+begin_src sh
+  docker-compose up -d
   make docker-back
   make dev # to run the backend listening on port 8080
 #+end_src
