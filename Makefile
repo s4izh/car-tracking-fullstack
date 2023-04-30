@@ -34,6 +34,8 @@ frontend-run: ## run the frontend (run inside the container)
 frontend-build:
 	trunk build --release --dist ./dist ./frontend/index.html
 
+frontend-deploy: frontend-build frontend-run
+
 db-setup: ## setup the db with diesel (run inside the container)
 	diesel setup
 
