@@ -12,6 +12,7 @@ use diesel::r2d2::{ConnectionManager, Pool};
 mod handlers;
 use handlers::frontend;
 use handlers::mobile;
+use handlers::common;
 
 mod db;
 // use db::utils;
@@ -55,16 +56,15 @@ async fn main() -> std::io::Result<()> {
                             .service(frontend::get_data)
                             .service(frontend::test)
                             .service(frontend::certificate)
-                            .service(frontend::create_user),
                     )
                     .service(
                         scope("/mobile")
                             .service(mobile::index)
                             .service(mobile::send_data)
                             .service(mobile::trip)
-                            .service(mobile::login)
-                            .service(mobile::create_user),
-                    ),
+                    )
+                    .service(common::create_user)
+                    .service(common::login),
             )
             .default_service(web::route().to(not_found))
         // .service(

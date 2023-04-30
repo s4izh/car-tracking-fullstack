@@ -37,64 +37,64 @@ async fn trip(
 }
 
 
-#[post("/create-user")]
-async fn create_user(
-    user: Json<common::UserData>,
-    pool: web::Data<Pool<ConnectionManager<MysqlConnection>>>
-) -> impl Responder {
+// #[post("/create-user")]
+// async fn create_user(
+//     user: Json<common::UserData>,
+//     pool: web::Data<Pool<ConnectionManager<MysqlConnection>>>
+// ) -> impl Responder {
 
-    // let user = common::UserData {
-    //     matricula: "9999".to_string(),
-    //     hash: "1234".to_string(),
-    // };
-    let mut conn = pool.get().expect("couldn't get db connection from pool");
+//     // let user = common::UserData {
+//     //     matricula: "9999".to_string(),
+//     //     hash: "1234".to_string(),
+//     // };
+//     let mut conn = pool.get().expect("couldn't get db connection from pool");
 
-    let result = users
-        .filter(matricula.eq(&user.matricula))
-        .first::<BdUser>(&mut *conn);
-    match result {
-        Ok(_) => return HttpResponse::BadRequest().json("User already exists"),
-        Err(diesel::NotFound) => (),
-        Err(_) => return HttpResponse::InternalServerError()
-            .body(format!("Error finding user")),
-    }
+//     let result = users
+//         .filter(matricula.eq(&user.matricula))
+//         .first::<BdUser>(&mut *conn);
+//     match result {
+//         Ok(_) => return HttpResponse::BadRequest().json("User already exists"),
+//         Err(diesel::NotFound) => (),
+//         Err(_) => return HttpResponse::InternalServerError()
+//             .body(format!("Error finding user")),
+//     }
 
-    let new_user = models::NewBdUser {
-        matricula: &user.matricula,
-        hash: &user.hash,
-    };
+//     let new_user = models::NewBdUser {
+//         matricula: &user.matricula,
+//         hash: &user.hash,
+//     };
 
-    diesel::insert_into(users)
-        .values(&new_user)
-        // .get_result(&mut *conn)
-        .execute(&mut *conn)
-        .map_err(|e| HttpResponse::InternalServerError()
-                 .body(format!("Error inserting user: {:?}", e)));
+//     diesel::insert_into(users)
+//         .values(&new_user)
+//         // .get_result(&mut *conn)
+//         .execute(&mut *conn)
+//         .map_err(|e| HttpResponse::InternalServerError()
+//                  .body(format!("Error inserting user: {:?}", e)));
 
-    HttpResponse::Ok().json(user)
-}
+//     HttpResponse::Ok().json(user)
+// }
 
 
-#[post("/login")]
-async fn login(
-    user: Json<common::UserData>,
-    pool: web::Data<Pool<ConnectionManager<MysqlConnection>>>
-) -> impl Responder {
+// #[post("/login")]
+// async fn login(
+//     user: Json<common::UserData>,
+//     pool: web::Data<Pool<ConnectionManager<MysqlConnection>>>
+// ) -> impl Responder {
 
-    let mut conn = pool.get().expect("couldn't get db connection from pool");
+//     let mut conn = pool.get().expect("couldn't get db connection from pool");
 
-    let result = users
-        .filter(matricula.eq(&user.matricula))
-        .filter(hash.eq(&user.hash))
-        .first::<BdUser>(&mut *conn);
-    match result {
-        Err(diesel::NotFound) => return HttpResponse::BadRequest().body("User doesn't exists or bad password"),
-        Ok(_) => (),
-        Err(_) => return HttpResponse::InternalServerError()
-            .body(format!("Error finding user")),
-    }
+//     let result = users
+//         .filter(matricula.eq(&user.matricula))
+//         .filter(hash.eq(&user.hash))
+//         .first::<BdUser>(&mut *conn);
+//     match result {
+//         Err(diesel::NotFound) => return HttpResponse::BadRequest().body("User doesn't exists or bad password"),
+//         Ok(_) => (),
+//         Err(_) => return HttpResponse::InternalServerError()
+//             .body(format!("Error finding user")),
+//     }
 
-    let trip_num = 0;
+//     let trip_num = 0;
 
-    HttpResponse::Ok().body(format!("{}",trip_num))
-}
+//     HttpResponse::Ok().body(format!("{}",trip_num))
+// }

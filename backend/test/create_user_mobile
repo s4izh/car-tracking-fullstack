@@ -1,5 +1,0 @@
-#!/bin/sh
-
-curl -X POST -H "Content-Type: application/json" \
-  -d '{"matricula":"100000","hash":"asdflalskdjfa"}' \
-  http://localhost:8080/api/mobile/create-user
