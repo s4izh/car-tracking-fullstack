@@ -8,6 +8,9 @@ help:
 docker-back:
 	docker exec -ti backend /bin/bash
 
+docker-front:
+	docker exec -ti frontend /bin/bash
+
 docker-blockchain-client:
 	docker exec -ti blockchain-client /bin/bash
 
