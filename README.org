@@ -1,12 +1,12 @@
 #+title: Instructions
 
 ** Running the dev enviromment
-Run docker and open a shell inside the backend container
+- Run docker compose to start the containers
+- =make setup= runs the backend and sets up the database
 
 #+begin_src sh
   docker-compose up -d
-  make docker-back
-  make dev # to run the backend listening on port 8080
+  make setup
 #+end_src
 
 *** Frontend

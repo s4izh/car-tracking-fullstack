@@ -21,8 +21,10 @@ docker-bd: ## enter the mariadb container
 	docker exec -ti mariadb /bin/bash
 
 dev: ## run the backend in a dev environment (run inside the container)
-	# cargo watch -x run -p backend
 	cargo run -p backend
+
+backend-setup:
+	docker exec -ti backend make dev
 
 deploy: ## deploy the backend (run inside the container)
 	cargo build --release -p backend
@@ -36,8 +38,11 @@ frontend-build:
 
 frontend-deploy: frontend-build frontend-run
 
-db-setup: ## setup the db with diesel (run inside the container)
-	diesel setup
+# db-setup: ## setup the db with diesel (run inside the container)
+# 	diesel setup
+
+db-setup:
+	docker exec -ti backend diesel database setup
 
 db-reset: ## reset the db (run inside the container)
 	diesel database reset
@@ -55,5 +60,4 @@ docker-down: ## kill docker containers
 	# docker-compose down --remove-orphans
 	docker-compose down
 
-docker-deploy: ## deploy docker containers
-	docker-compose run --service-ports backend make deploy
+setup: db-setup backend-setup
