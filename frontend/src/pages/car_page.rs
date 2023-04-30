@@ -43,7 +43,6 @@ pub fn car_page() -> Html {
                 <div class="mt-8">
                   <p class="mb-4">{format!("Timestap: {}", info.timestamp)}</p>
                   <p class="mb-4">{format!("Velocidad: {}", info.speed)}</p>
-                  <p class="mb-4">{format!("Codigos de error: {}", info.trouble_codes)}</p>
                   <p class="mb-4">{format!("RPM: {}", info.rpm)}</p>
           
                 </div>

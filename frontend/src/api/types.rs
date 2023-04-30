@@ -22,7 +22,6 @@ pub struct UserData {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CarGeneralData {
     pub timestamp: String,
-    pub trouble_codes: String,
     pub speed: i32,
     pub rpm: i32,
     pub throttle: f32,
@@ -32,6 +31,8 @@ pub struct CarGeneralData {
     pub fuel_level: f32,
     pub fuel_consumption: f32,
 }
+
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UserResponse {
     pub status: String,
