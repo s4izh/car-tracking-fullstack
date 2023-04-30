@@ -4,9 +4,18 @@
 Run docker and open a shell inside the backend container
 
 #+begin_src sh
-  make docker-dev
+  make docker-back
   make dev # to run the backend listening on port 8080
 #+end_src
+
+*** Frontend
+
+#+begin_src sh
+  make docker-front
+  make frontend-build
+  make frontend-run
+#+end_src
+
 
 *** MariaDB
 
