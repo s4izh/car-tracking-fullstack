@@ -6,7 +6,7 @@ help:
 	| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 docker-back:
-	docker exec -ti pti-rust-backend /bin/bash
+	docker exec -ti backend /bin/bash
 
 docker-blockchain-client:
 	docker exec -ti blockchain-client /bin/bash

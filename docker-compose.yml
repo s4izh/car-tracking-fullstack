@@ -55,7 +55,7 @@ services:
     command: python app.py
 
   backend:
-    container_name: pti-rust-backend
+    container_name: backend
     stdin_open: true
     tty: true
     environment:
@@ -74,14 +74,36 @@ services:
       - "target:/app/target"
     ports:
       - 8080:8080
+    expose:
+      - 8080
     depends_on:
       # - mariadb
       mariadb:
         condition: service_healthy
     # command: cargo make --profile docker backend-run
 
+  frontend:
+    container_name: frontend
+    stdin_open: true
+    tty: true
+    environment:
+      - BACKEND_URL=http://backend:8080
+      - RUST_LOG=debug
+      - CARGO_HOME=/app/.cargo
+      - CARGO_TARGET_DIR=/app/target
+    build:
+      context: frontend
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "cargo:/app/.cargo"
+      - "target:/app/target"
+      - "rustup:/app/.rustup"
+    ports:
+      - 3000:3000
 
 volumes:
   db-data:
   cargo:
   target:
+  rustup:
