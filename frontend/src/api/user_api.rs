@@ -42,7 +42,7 @@ pub async fn api_car() -> Result<CarGeneralData, String> {
     
 
 
-pub async fn api_register_user(user_data: &str) -> Result<serde_json::Value, String> {
+pub async fn api_register_user(user_data: &str) -> Result<String, String> {
     let response = match http::Request::post("http://localhost:8080/api/create-user")
         .header("Content-Type", "application/json")
         .body(user_data)
@@ -62,8 +62,8 @@ pub async fn api_register_user(user_data: &str) -> Result<serde_json::Value, Str
         }
     }
 
-    let res_json = response.json().await;
-    match res_json {
+    let res_body = response.text().await;
+    match res_body {
         Ok(data) => Ok(data),
         Err(_) => Err("Failed to parse response".to_string()),
     }
