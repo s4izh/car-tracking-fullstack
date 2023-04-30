@@ -51,9 +51,6 @@ pub fn header_component() -> Html {
             <Link<Route> to={Route::HomePage} classes="text-ct-dark-600">{"Home"}</Link<Route>>
 
           </li>
-          <li>
-            <Link<Route> to={Route::CarPage} classes="text-ct-dark-600">{"Car"}</Link<Route>>
-          </li>
           if user.is_some() {
              <>
               <li>

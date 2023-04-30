@@ -19,15 +19,14 @@ use yewdux::prelude::*;
 
 struct LoginUserSchema {
     #[validate(
-        length(min = 1, message = "Email is required"),
-        email(message = "Email is invalid")
+        length(min = 1, message = "Matricula is required"),
     )]
-    email: String,
+    matricula: String,
     #[validate(
         length(min = 1, message = "Password is required"),
         length(min = 6, message = "Password must be at least 6 characters")
     )]
-    password: String,
+    hash: String,
 }
 
 fn get_input_callback(
@@ -37,8 +36,8 @@ fn get_input_callback(
     Callback::from(move |value| {
         let mut data = cloned_form.deref().clone();
         match name {
-            "email" => data.email = value,
-            "password" => data.password = value,
+            "email" => data.matricula = value,
+            "password" => data.hash = value,
             _ => (),
         }
         cloned_form.set(data);
@@ -61,8 +60,8 @@ pub fn login_page() -> Html {
         Callback::from(move |(name, value): (String, String)| {
             let mut data = cloned_form.deref().clone();
             match name.as_str() {
-                "email" => data.email = value,
-                "password" => data.password = value,
+                "email" => data.matricula = value,
+                "password" => data.hash = value,
                 _ => (),
             }
             cloned_form.set(data);
@@ -132,7 +131,7 @@ pub fn login_page() -> Html {
                         match res {
                             Ok(_) => {
                                 set_page_loading(false, dispatch);
-                                navigator.push(&router::Route::ProfilePage);
+                                navigator.push(&router::Route::CarPage);
                             }
                             Err(e) => {
                                 set_page_loading(false, dispatch.clone());
@@ -161,14 +160,10 @@ pub fn login_page() -> Html {
             onsubmit={on_submit}
             class="max-w-md w-full mx-auto overflow-hidden shadow-lg bg-ct-dark-200 rounded-2xl p-8 space-y-5"
           >
-            <FormInput label="Email" name="email" input_type="email" input_ref={email_input_ref} handle_onchange={handle_email_input} errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
+
+            <FormInput label="Matricula" name="email" input_ref={email_input_ref} handle_onchange={handle_email_input} errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
             <FormInput label="Password" name="password" input_type="password" input_ref={password_input_ref} handle_onchange={handle_password_input} errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()}/>
 
-            <div class="text-right">
-              <a href="#">
-                {"Forgot Password?"}
-              </a>
-            </div>
             <LoadingButton
               loading={store.page_loading}
               text_color={Some("text-ct-blue-600".to_string())}

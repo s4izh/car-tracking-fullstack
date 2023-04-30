@@ -71,8 +71,8 @@ pub async fn api_register_user(user_data: &str) -> Result<String, String> {
 
 
 
-pub async fn api_login_user(credentials: &str) -> Result<UserLoginResponse, String> {
-    let response = match http::Request::post("http://localhost:8000/api/auth/login")
+pub async fn api_login_user(credentials: &str) -> Result<String, String> {
+    let response = match http::Request::post("http://localhost:8080/api/login")
         .header("Content-Type", "application/json")
         .credentials(http::RequestCredentials::Include)
         .body(credentials)
@@ -92,8 +92,8 @@ pub async fn api_login_user(credentials: &str) -> Result<UserLoginResponse, Stri
         }
     }
 
-    let res_json = response.json::<UserLoginResponse>().await;
-    match res_json {
+    let res_body = response.text().await;
+    match res_body {
         Ok(data) => Ok(data),
         Err(_) => Err("Failed to parse response".to_string()),
     }
