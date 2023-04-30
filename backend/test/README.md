@@ -27,7 +27,7 @@ For login in, it returns a json with relevant information.
 ```sh
 curl -X POST -H "Content-Type: application/json" -d \
 '{"matricula":"9999","hash":"1234"}' \
-http://localhost:8080/api/frontend/create-user
+http://localhost:8080/api/frontend/login
 ```
 
 #### `api/frontend/certificate`
