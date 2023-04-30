@@ -32,7 +32,7 @@ frontend-run: ## run the frontend (run inside the container)
 	cd frontend && trunk serve --address 0.0.0.0 --port 3000
 
 frontend-build:
-	trunk build --release --dist ./dist ./frontend/index.html
+	cd frontend && trunk build --release
 
 frontend-deploy: frontend-build frontend-run
 
