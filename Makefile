@@ -5,19 +5,19 @@ help:
 	| sort \
 	| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-docker-back:
+docker-back: ## enter the backend container
 	docker exec -ti backend /bin/bash
 
-docker-front:
+docker-front: ## enter the frontend container
 	docker exec -ti frontend /bin/bash
 
-docker-blockchain-client:
+docker-blockchain-client: ## enter the blockchain-client container
 	docker exec -ti blockchain-client /bin/bash
 
-docker-blockchain:
+docker-blockchain: ## enter the blockchain container
 	docker exec -ti blockchain /bin/bash
 
-docker-bd:
+docker-bd: ## enter the mariadb container
 	docker exec -ti mariadb /bin/bash
 
 dev: ## run the backend in a dev environment (run inside the container)
@@ -28,8 +28,8 @@ deploy: ## deploy the backend (run inside the container)
 	cargo build --release -p backend
 	cargo run -p backend
 
-frontend-run: ## run the frontend
-	trunk serve --address 0.0.0.0 --dist ./target/dist ./frontend/index.html
+frontend-run: ## run the frontend (run inside the container)
+	trunk serve --address 0.0.0.0 --dist ./target/dist ./frontend/index.html --port 3000
 
 frontend-build:
 	trunk build --release --dist ./dist ./frontend/index.html
