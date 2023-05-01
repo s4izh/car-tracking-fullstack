@@ -6,7 +6,7 @@ use crate::db::schema::users::dsl::users;
 use crate::db::{models, schema};
 
 use crate::db::models::BdUser;
-use crate::db::schema::users::{matricula, hash};
+use crate::db::schema::users::{matricula, hash, total_km};
 
 #[get("/")]
 async fn index() -> impl Responder {
@@ -60,17 +60,17 @@ async fn certificate(
 
     // get km
 
-    // conseguir kilometraje
+    let kilometers = result.as_ref().unwrap().total_km;
+    let mat = &user.matricula;
 
     // ------
 
+    // certificar
+
     let blockchain_client_url = std::env::var("BLOCKCHAIN_CLIENT_URL").expect("BLOCKCHAIN_CLIENT_URL must be set");
 
-    let mat = 0;
-    let k = 1000;
-
     let url = format!("{}/certificate?matricula={}&km={}", 
-                      blockchain_client_url, mat, k);
+                      blockchain_client_url, mat, kilometers);
 
     let response = reqwest::get(&url).await.map_err(|e| {
         // convert reqwest::Error into actix_web::Error
