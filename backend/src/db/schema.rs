@@ -7,12 +7,12 @@ diesel::table! {
         timestamp -> Varchar,
         speed -> Integer,
         rpm -> Integer,
-        throttle -> Float,
-        engine_load -> Float,
-        engine_coolant_temp -> Float,
-        oil_temp -> Float,
-        fuel_level -> Float,
-        fuel_consumption -> Float,
+        throttle -> Double,
+        engine_load -> Double,
+        engine_coolant_temp -> Double,
+        oil_temp -> Double,
+        fuel_level -> Double,
+        fuel_consumption -> Double,
     }
 }
 
@@ -21,10 +21,12 @@ diesel::table! {
         id -> Integer,
         trip -> Integer,
         km -> Integer,
-        avg_speed -> Float,
-        fuel_percentage -> Float,
+        max_speed -> Integer,
+        avg_speed -> Double,
+        fuel_percentage -> Double,
         duration -> Integer,
         trouble_codes -> Varchar,
+        date_created -> Timestamp,
     }
 }
 

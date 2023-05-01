@@ -61,7 +61,7 @@ async fn main() -> std::io::Result<()> {
                         scope("/mobile")
                             .service(mobile::index)
                             .service(mobile::send_data)
-                            .service(mobile::trip)
+                            .service(mobile::add_trip)
                     )
                     .service(common::create_user)
                     .service(common::login),

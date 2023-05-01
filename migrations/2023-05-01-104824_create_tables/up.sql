@@ -13,10 +13,12 @@ CREATE TABLE trips (
     id              INT             NOT NULL,
     trip            INT             NOT NULL,
     km    	        INT             NOT NULL,
-    avg_speed       FLOAT           NOT NULL,
-    fuel_percentage FLOAT           NOT NULL,
+    max_speed       INT             NOT NULL,
+    avg_speed       DOUBLE           NOT NULL,
+    fuel_percentage DOUBLE           NOT NULL,
     duration        INT             NOT NULL,
     trouble_codes   VARCHAR(255)    NOT NULL,
+    date_created           TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id, trip)
 );
 
@@ -26,11 +28,12 @@ CREATE TABLE car_data (
   timestamp           VARCHAR(255)    NOT NULL,
   speed               INT             NOT NULL,
   rpm                 INT             NOT NULL,
-  throttle            FLOAT           NOT NULL,
-  engine_load         FLOAT           NOT NULL,
-  engine_coolant_temp FLOAT           NOT NULL,
-  oil_temp            FLOAT           NOT NULL,
-  fuel_level          FLOAT           NOT NULL,
-  fuel_consumption    FLOAT           NOT NULL,
+  throttle            DOUBLE           NOT NULL,
+  engine_load         DOUBLE           NOT NULL,
+  engine_coolant_temp DOUBLE           NOT NULL,
+  oil_temp            DOUBLE           NOT NULL,
+  fuel_level          DOUBLE           NOT NULL,
+  fuel_consumption    DOUBLE           NOT NULL,
   PRIMARY KEY (id, timestamp)
 );
+

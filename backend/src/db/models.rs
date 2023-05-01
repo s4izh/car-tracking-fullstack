@@ -1,8 +1,9 @@
 // use crate::schema::*;
 use diesel::{Queryable, Insertable};
 use chrono::NaiveDateTime;
-use crate::db::schema::users;
-// use crate::db::schema::car_data;
+use crate::db::schema::{users,trips,car_data};
+// use diesel::sql_types::Double;
+use diesel::sql_types::Double;
 
 #[derive(Queryable, Debug, Clone)]
 #[diesel(table_name = users)]
@@ -22,34 +23,60 @@ pub struct NewBdUser<'a> {
     pub hash: &'a str,
 }
 
-// #[derive(Queryable, Debug, Clone)]
-// #[table_name = "car_data"]
-// pub struct DbCarData{
+#[derive(Queryable, Debug, Clone)]
+#[diesel(table_name = trips)]
+pub struct BdTrip {
+    pub id: i32,
+    pub trip: i32,
+    pub km: i32,
+    pub avg_speed: Double,
+    pub max_speed: Double,
+    pub fuel_percentage: Double,
+    pub duration: i32,
+    pub trouble_codes: String,
+    pub date_created: NaiveDateTime,
+}
+
+// #[derive(Insertable, Debug)]
+// #[diesel(table_name = trips)]
+// pub struct NewBdTrip<'a> {
 //     pub id: i32,
-//     pub timestamp: String,
-//     pub trouble_codes: String,
-//     pub speed: i32,
-//     pub rpm: i32,
-//     pub throttle: f32,
-//     pub engine_load: f32,
-//     pub engine_coolant_temp: f32,
-//     pub oil_temp: f32,
-//     pub fuel_level: f32,
-//     pub fuel_consumption: f32,
+//     pub trip: i32,
+//     pub km: i32,
+//     pub avg_speed: &'a f64,
+//     pub max_speed: &'a f64,
+//     pub fuel_percentage: &'a f64,
+//     pub duration: i32,
+//     pub trouble_codes: &'a str,
 // }
+
+#[derive(Queryable, Debug, Clone)]
+#[diesel(table_name = car_data)]
+pub struct DbCarData{
+    pub id: i32,
+    pub timestamp: String,
+    pub trouble_codes: String,
+    pub speed: i32,
+    pub rpm: i32,
+    pub throttle: Double,
+    pub engine_load: Double,
+    pub engine_coolant_temp: Double,
+    pub oil_temp: Double,
+    pub fuel_level: Double,
+    pub fuel_consumption: Double,
+}
 
 // #[derive(Insertable)]
-// #[table_name = "car_data"]
+// #[diesel(table_name = car_data)]
 // pub struct NewDbCarData<'a> {
+//     pub id: i32,
 //     pub timestamp: &'a str,
-//     pub trouble_codes: &'a str,
 //     pub speed: i32,
 //     pub rpm: i32,
-//     pub throttle: f32,
-//     pub engine_load: f32,
-//     pub engine_coolant_temp: f32,
-//     pub oil_temp: f32,
-//     pub fuel_level: f32,
-//     pub fuel_consumption: f32,
+//     pub throttle: Double,
+//     pub engine_load: Double,
+//     pub engine_coolant_temp: Double,
+//     pub oil_temp: Double,
+//     pub fuel_level: Double,
+//     pub fuel_consumption: Double,
 // }
-

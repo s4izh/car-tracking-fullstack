@@ -61,7 +61,8 @@ async fn create_user(
         .values(&new_user)
         .execute(&mut *conn)
         .map_err(|e| HttpResponse::InternalServerError()
-                 .body(format!("Error inserting user: {:?}", e)));
+        .body(format!("Error inserting user: {:?}", e)))
+        .expect("Error inserting user");
 
     HttpResponse::Ok().body("User created")
 }
