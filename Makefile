@@ -26,7 +26,7 @@ dev: ## run the backend in a dev environment (run inside the container)
 backend-setup:
 	docker exec -ti backend make dev
 
-deploy: ## deploy the backend (run inside the container)
+backend-deploy: ## deploy the backend (run inside the container)
 	cargo build --release -p backend
 	cargo run -p backend
 
