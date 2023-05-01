@@ -12,7 +12,7 @@ For creating an user.
 
 ```sh
 curl -X POST -H "Content-Type: application/json" \
-  -d '{"matricula":"9999","hash":"1234"}' \
+  -d '{"matricula":"100000","hash":"abcde"}' \
   http://localhost:8080/api/create-user
 ```
 
@@ -26,7 +26,7 @@ For login in.
 
 ```sh
 curl -i -X POST -H "Content-Type: application/json" \
-  -d '{"matricula":"9999","hash":"1234"}' \
+  -d '{"matricula":"100000","hash":"abcde"}' \
   http://localhost:8080/api/login
 ```
 
@@ -46,7 +46,7 @@ It cerficates current km at the blockchain.
 
 ```sh
 curl -i -X POST -H "Content-Type: application/json" \
-  -d '{"matricula":"9999","hash":"1234"}' \
+  -d '{"matricula":"100000","hash":"abcde"}' \
   http://localhost:8080/api/frontend/certificate
 ```
 
