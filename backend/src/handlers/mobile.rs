@@ -16,7 +16,6 @@ use serde::{Deserialize, Serialize};
 pub struct TripData {
     pub matricula: String,
     pub hash: String,
-    pub trip: i32, // numero
     pub km: i32, // km
     pub max_speed: i32, // km/h
     pub speed_average: f64, // km/h
