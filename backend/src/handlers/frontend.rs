@@ -1,14 +1,9 @@
 use actix_web::{get, post, web, web::Json, HttpResponse, Responder, error};
 
-use diesel::r2d2::Pool;
-use diesel::r2d2::ConnectionManager;
-use diesel::MysqlConnection;
-use diesel::RunQueryDsl;
-use diesel::QueryDsl;
-use diesel::ExpressionMethods;
+use diesel::r2d2::{Pool,ConnectionManager};
+use diesel::{MysqlConnection, RunQueryDsl, QueryDsl, ExpressionMethods};
 use crate::db::schema::users::dsl::users;
-use crate::db::models;
-use crate::db::schema;
+use crate::db::{models, schema};
 
 use crate::db::models::BdUser;
 use crate::db::schema::users::{matricula, hash};
