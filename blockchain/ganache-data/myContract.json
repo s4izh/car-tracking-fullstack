@@ -1,0 +1,108 @@
+{
+    "address": "0xB2C039eAfd62A66bF9802088538feb4838BC4421",
+    "abi": [
+        {
+          "inputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "constant": false,
+          "inputs": [],
+          "name": "initCertifications",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "licensePlate",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "currentKilometer",
+              "type": "uint256"
+            }
+          ],
+          "name": "certifyKilometer",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "licensePlate",
+              "type": "string"
+            }
+          ],
+          "name": "getCarKilometer",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "licensePlate",
+              "type": "string"
+            }
+          ],
+          "name": "getCarCertificationTimestamp",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "_licensePlate",
+              "type": "string"
+            }
+          ],
+          "name": "getCarCertification",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+  }

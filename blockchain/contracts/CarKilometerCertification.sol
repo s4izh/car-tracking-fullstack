@@ -26,7 +26,7 @@ function initCertifications() public {
 
     //Certifica un nuevo kilometraje con su timestamp correspondiente
     function certifyKilometer(string memory licensePlate, uint256 currentKilometer) public {
-        if (bytes(cars[licensePlate].licensePlate).length != 0) {
+        if (bytes(cars[licensePlate].licensePlate).length == 0) {
             cars[licensePlate] = Car(licensePlate, currentKilometer, block.timestamp);
         }
         else {
