@@ -1,11 +1,11 @@
 use gloo::console;
 use yew::prelude::*;
+use plotters::prelude::*;
 //use yew_router::prelude::use_navigator;
 use yewdux::prelude::*;
 use crate::api::user_api::api_car;
 use crate::components::header::Header;
 use crate::store::{set_info_car,Store};
-
 
 
 #[function_component(CarPage)]
@@ -29,6 +29,9 @@ pub fn car_page() -> Html {
         },
         (),
     );
+
+
+    
 
     
 

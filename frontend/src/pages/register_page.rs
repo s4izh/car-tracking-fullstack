@@ -18,7 +18,7 @@ use yewdux::prelude::*;
 #[derive(Validate, Debug, Default, Clone, Serialize, Deserialize)]
 
 struct RegisterUserSchema {
-    #[validate(length(min = 1, message = "Name is required"))]
+    #[validate(length(min = 1, message = "License plate is required"))]
     matricula: String,
     #[validate(
         length(min = 1, message = "Password is required"),
@@ -174,11 +174,11 @@ pub fn register_page() -> Html {
             onsubmit={on_submit}
             class="max-w-md w-full mx-auto overflow-hidden shadow-lg bg-ct-dark-200 rounded-2xl p-8 space-y-5"
           >
-            <FormInput label="Matricula" name="name" input_ref={name_input_ref} handle_onchange={handle_name_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
-            <FormInput label="Password" name="password" input_type="password" input_ref={password_input_ref} handle_onchange={handle_password_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
+            <FormInput label="License plate" name="matricula" input_ref={name_input_ref} handle_onchange={handle_name_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
+            <FormInput label="Password" name="hash" input_type="password" input_ref={password_input_ref} handle_onchange={handle_password_input}  errors={&*validation_errors} handle_on_input_blur={validate_input_on_blur.clone()} />
             <FormInput
               label="Confirm Password"
-              name="password_confirm"
+              name="hash_confirm"
               input_type="password"
               input_ref={password_confirm_input_ref}
               handle_onchange={handle_password_confirm_input}
