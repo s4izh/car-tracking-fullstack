@@ -22,21 +22,21 @@ pub struct TripData {
     pub fuel_percentage: f64, // fuel %
     pub duration: i32, // seconds
     pub trouble_codes: String,
-    pub data: Vec<CarData>,
+    pub data: Vec<common::CarData>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
-pub struct CarData {
-    pub timestamp: String,
-    pub speed: i32,
-    pub rpm: i32,
-    pub throttle: f32,
-    pub engine_load: f32,
-    pub engine_coolant_temp: f32,
-    pub oil_temp: f32,
-    pub fuel_level: f32,
-    pub fuel_consumption: f32,
-}
+// #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
+// pub struct CarData {
+//     pub timestamp: String,
+//     pub speed: i32,
+//     pub rpm: i32,
+//     pub throttle: f32,
+//     pub engine_load: f32,
+//     pub engine_coolant_temp: f32,
+//     pub oil_temp: f32,
+//     pub fuel_level: f32,
+//     pub fuel_consumption: f32,
+// }
 
 #[get("/")]
 async fn index() -> impl Responder {

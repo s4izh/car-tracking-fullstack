@@ -1,10 +1,22 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
-pub struct TripData {
+pub struct UserData {
     pub matricula: String,
     pub hash: String,
-    pub trip: i32, // numero
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
+pub struct User {
+    pub matricula: String,
+    pub total_km: i32,
+    pub trip: i32,
+    pub date_created: chrono::NaiveDateTime,
+    pub trip_data: Vec<Trip>,
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
+pub struct Trip {
     pub km: i32, // km
     pub max_speed: i32, // km/h
     pub speed_average: f64, // km/h
@@ -19,25 +31,10 @@ pub struct CarData {
     pub timestamp: String,
     pub speed: i32,
     pub rpm: i32,
-    pub throttle: f32,
-    pub engine_load: f32,
-    pub engine_coolant_temp: f32,
-    pub oil_temp: f32,
-    pub fuel_level: f32,
-    pub fuel_consumption: f32,
+    pub throttle: f64,
+    pub engine_load: f64,
+    pub engine_coolant_temp: f64,
+    pub oil_temp: f64,
+    pub fuel_level: f64,
+    pub fuel_consumption: f64,
 }
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
-pub struct UserData {
-    pub matricula: String,
-    pub hash: String,
-}
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
-pub struct UserMainInfo {
-    pub total_km: i32,
-    pub trip: i32, // número de viajes
-    pub date_created: chrono::NaiveDateTime,
-}
-
-
