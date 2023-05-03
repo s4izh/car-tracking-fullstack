@@ -1,4 +1,4 @@
-**Instrucciones para runnear blockchain en local:
+#+title: Instrucciones para runnear blockchain en local:
 
 - Para testear que todo funciona correctamente, puedes seguir los siguientes pasos:
 
