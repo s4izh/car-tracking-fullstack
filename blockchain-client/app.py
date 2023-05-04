@@ -11,7 +11,7 @@ myAddress = myAccount.address
 myPrivateKey = myAccount._private_key
 print('my address is     : {}'.format(myAccount.address))
 print('my private key is : {}'.format(myPrivateKey.hex()))
-export BLOCKCHAIN_URL= 'http://127.0.0.1:7545'
+BLOCKCHAIN_URL= "http://127.0.0.1:7545"
 
 
 def send_certificate_request(matricula, km):
