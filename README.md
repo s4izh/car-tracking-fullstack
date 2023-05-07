@@ -35,6 +35,14 @@ make db-reset # resets the database
 **Note** there's no need of `make setup` when developing the backend, since we do 
 it manually.
 
+#### MariaDB
+
+Open a shell in the `mariadb` container:
+
+```bash
+docker exec -ti mariadb mysql -U db -prust
+```
+
 ### Frontend dev
 
 Run the general development enviroment commands [here](#Running-the-development-environment).
