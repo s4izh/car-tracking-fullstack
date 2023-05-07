@@ -1,5 +1,14 @@
 # Endpoint Documentation and Testing
 
+Use the scripts on this directory to fill the database 
+with some data for testing.
+
+```sh
+./create_user # create the user
+./send_trips # send multiple trips
+./get_trips # get a json with all the trips
+```
+
 ## Common Endpoints
 
 #### `api/create-user`
