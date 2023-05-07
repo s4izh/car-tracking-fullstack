@@ -1,6 +1,6 @@
 # Endpoint Documentation and Testing
 
-Use the scripts on this directory to fill the database 
+Use the scripts in this directory to fill the database 
 with some data for testing.
 
 ```sh
