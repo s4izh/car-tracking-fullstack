@@ -1,0 +1,112 @@
+version: "3.1"
+
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:10.6.4-focal
+    command: '--default-authentication-plugin=mysql_native_password'
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=rust
+      - MYSQL_DATABASE=db
+      - MYSQL_USER=db
+      - MYSQL_PASSWORD=db
+    expose:
+      - 3306
+      - 33060
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "mariadb", "-u", "root", "-prust"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+
+  # truffle:
+  #   container_name: truffle
+  #   stdin_open: true
+  #   tty: true
+  #   build:
+  #     context: blockchain
+  #   volumes:
+  #     - .:/app
+  #   expose:
+  #     - 7545
+  #     - 8545
+  #   ports:
+  #     - 7545:7545
+  #     - 3000:8081
+
+  blockchain-client:
+    container_name: blockchain-client
+    stdin_open: true
+    tty: true
+    build:
+      context: blockchain-client
+    working_dir: /app/blockchain-client
+    volumes:
+      - ".:/app"
+    # environment:
+    #   - BLOCKCHAIN_URL=http://blockchain:7545
+    ports:
+      - 5000:5000
+    expose:
+      - 5000
+    network_mode: host
+    command: python app.py
+
+  backend:
+    container_name: backend
+    stdin_open: true
+    tty: true
+    environment:
+      - DATABASE_URL=mysql://db:db@mariadb/db
+      - BACKEND_PORT=8080
+      - BLOCKCHAIN_CLIENT_URL=http://blockchain-client:5000/
+      - RUST_LOG=debug
+      - CARGO_HOME=/app/.cargo
+      - CARGO_TARGET_DIR=/app/target
+    build:
+      context: backend
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "cargo:/app/.cargo"
+      - "target:/app/target"
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    depends_on:
+      # - mariadb
+      mariadb:
+        condition: service_healthy
+    command: make backend-deploy
+
+  frontend:
+    container_name: frontend
+    stdin_open: true
+    tty: true
+    environment:
+      - BACKEND_URL=http://backend:8080
+      - RUST_LOG=debug
+      - CARGO_HOME=/app/.cargo
+      - CARGO_TARGET_DIR=/app/target
+    build:
+      context: frontend
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "cargo:/app/.cargo"
+      - "target:/app/target"
+      - "rustup:/app/.rustup"
+    ports:
+      - 3000:3000
+    command:
+      make frontend-deploy
+
+volumes:
+  db-data:
+  cargo:
+  target:
+  rustup:
