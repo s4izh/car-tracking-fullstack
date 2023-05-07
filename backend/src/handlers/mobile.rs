@@ -74,20 +74,20 @@ async fn add_trip(
 
     // add the new trip
 
-    // let new_trip = models::NewBdTrip {
-    //     id: user_id,
-    //     trip: trip_num,
-    //     km: trip_data.km,
-    //     avg_speed: trip_data.speed_average,
-    //     max_speed: trip_data.max_speed,
-    //     fuel_percentage: trip_data.fuel_percentage,
-    //     duration: trip_data.duration,
-    //     trouble_codes: &trip_data.trouble_codes,
-    // };
-    // diesel::insert_into(trips)
-    //     .values(&new_trip)
-    //     .execute(&mut *conn)
-    //     .expect("Error inserting trip");
+    let new_trip = models::NewBdTrip {
+        id: user_id,
+        trip: trip_num,
+        km: trip_data.km,
+        avg_speed: (trip_data.speed_average * 100.0) as i32,
+        max_speed: trip_data.max_speed,
+        fuel_percentage: (trip_data.fuel_percentage * 100.0) as i32,
+        duration: trip_data.duration,
+        trouble_codes: &trip_data.trouble_codes,
+    };
+    diesel::insert_into(trips)
+        .values(&new_trip)
+        .execute(&mut *conn)
+        .expect("Error inserting trip");
 
     // increment the trip number
 
