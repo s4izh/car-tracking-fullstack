@@ -3,8 +3,9 @@ use diesel::{Queryable, Insertable};
 use diesel::Expression;
 use chrono::NaiveDateTime;
 use crate::db::schema::{users,trips,car_data};
-// use diesel::sql_types::Double;
-use diesel::sql_types::Double;
+// use diesel::sql_types::i32;
+// use diesel::sql_types::i32;
+// use core::i32;
 
 #[derive(Queryable, Debug, Clone)]
 #[diesel(table_name = users)]
@@ -30,9 +31,9 @@ pub struct BdTrip {
     pub id: i32,
     pub trip: i32,
     pub km: i32,
-    pub avg_speed: Double,
-    pub max_speed: Double,
-    pub fuel_percentage: Double,
+    pub avg_speed: i32,
+    pub max_speed: i32,
+    pub fuel_percentage: i32,
     pub duration: i32,
     pub trouble_codes: String,
     pub date_created: NaiveDateTime,
@@ -44,9 +45,9 @@ pub struct NewBdTrip<'a> {
     pub id: i32,
     pub trip: i32,
     pub km: i32,
-    pub avg_speed: Double,
-    pub max_speed: Double,
-    pub fuel_percentage: Double,
+    pub avg_speed: i32,
+    pub max_speed: i32,
+    pub fuel_percentage: i32,
     pub duration: i32,
     pub trouble_codes: &'a str,
 }
@@ -59,12 +60,12 @@ pub struct DbCarData{
     pub trouble_codes: String,
     pub speed: i32,
     pub rpm: i32,
-    pub throttle: Double,
-    pub engine_load: Double,
-    pub engine_coolant_temp: Double,
-    pub oil_temp: Double,
-    pub fuel_level: Double,
-    pub fuel_consumption: Double,
+    pub throttle: i32,
+    pub engine_load: i32,
+    pub engine_coolant_temp: i32,
+    pub oil_temp: i32,
+    pub fuel_level: i32,
+    pub fuel_consumption: i32,
 }
 
 // #[derive(Insertable)]
@@ -74,10 +75,10 @@ pub struct DbCarData{
 //     pub timestamp: &'a str,
 //     pub speed: i32,
 //     pub rpm: i32,
-//     pub throttle: Double,
-//     pub engine_load: Double,
-//     pub engine_coolant_temp: Double,
-//     pub oil_temp: Double,
-//     pub fuel_level: Double,
-//     pub fuel_consumption: Double,
+//     pub throttle: i32,
+//     pub engine_load: i32,
+//     pub engine_coolant_temp: i32,
+//     pub oil_temp: i32,
+//     pub fuel_level: i32,
+//     pub fuel_consumption: i32,
 // }
