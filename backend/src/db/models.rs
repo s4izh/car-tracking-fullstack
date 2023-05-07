@@ -1,5 +1,6 @@
 // use crate::schema::*;
 use diesel::{Queryable, Insertable};
+use diesel::Expression;
 use chrono::NaiveDateTime;
 use crate::db::schema::{users,trips,car_data};
 // use diesel::sql_types::Double;
@@ -37,18 +38,18 @@ pub struct BdTrip {
     pub date_created: NaiveDateTime,
 }
 
-// #[derive(Insertable, Debug)]
-// #[diesel(table_name = trips)]
-// pub struct NewBdTrip<'a> {
-//     pub id: i32,
-//     pub trip: i32,
-//     pub km: i32,
-//     pub avg_speed: &'a f64,
-//     pub max_speed: &'a f64,
-//     pub fuel_percentage: &'a f64,
-//     pub duration: i32,
-//     pub trouble_codes: &'a str,
-// }
+#[derive(Insertable, Debug)]
+#[diesel(table_name = trips)]
+pub struct NewBdTrip<'a> {
+    pub id: i32,
+    pub trip: i32,
+    pub km: i32,
+    pub avg_speed: Double,
+    pub max_speed: Double,
+    pub fuel_percentage: Double,
+    pub duration: i32,
+    pub trouble_codes: &'a str,
+}
 
 #[derive(Queryable, Debug, Clone)]
 #[diesel(table_name = car_data)]
