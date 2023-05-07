@@ -3,7 +3,6 @@
 
 viajes=./trips
 
-
 # bucle por los .json
 for file in ${viajes}/*.json
 do
@@ -11,6 +10,4 @@ do
     -H "Content-Type: application/json" \
     -d @$file \
     http://localhost:8080/api/mobile/trip
-
-
 done

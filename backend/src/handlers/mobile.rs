@@ -58,6 +58,7 @@ async fn add_trip(
 
     let user_id = result.as_ref().unwrap().id;
     let trip_num = result.as_ref().unwrap().trip;
+    let error_codes = &trip_data.trouble_codes.replace("\n", " ");
 
     // add the new trip
 
@@ -69,7 +70,7 @@ async fn add_trip(
         max_speed: trip_data.max_speed,
         fuel_percentage: (trip_data.fuel_percentage * 100.0) as i32,
         duration: trip_data.duration,
-        trouble_codes: &trip_data.trouble_codes,
+        trouble_codes: error_codes,
     };
     diesel::insert_into(trips)
         .values(&new_trip)
