@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y nodejs
 
 # Instalar npx
 RUN npm install -g npm@9.6.5
+RUN npm install -g postcss-cli@8.3.1 autoprefixer@10.4.0 tailwindcss@3.1.4
 #RUN npm install -g npx
 
 
