@@ -113,6 +113,26 @@ async fn add_trip(
 
     // add car_data
 
+    trip_data.data.iter().for_each(|car_data| {
+        let new_car_data = models::NewBdCarData {
+            id: user_id,
+            trip: trip_num,
+            timestamp: &car_data.timestamp,
+            speed: car_data.speed,
+            rpm: car_data.rpm,
+            throttle: (car_data.throttle * 100.0) as i32,
+            engine_load: (car_data.engine_load * 100.0) as i32,
+            engine_coolant_temp: (car_data.engine_coolant_temp * 100.0) as i32,
+            oil_temp: (car_data.oil_temp * 100.0) as i32,
+            fuel_level: (car_data.fuel_level * 100.0) as i32,
+            fuel_consumption: (car_data.fuel_consumption * 100.0) as i32,
+        };
+        diesel::insert_into(schema::car_data::table)
+            .values(&new_car_data)
+            .execute(&mut *conn)
+            .expect("Error inserting car_data");
+    });
+
     // HttpResponse::Ok().json(trip_data.into_inner())
     HttpResponse::Ok().body(format!("{}", trip_num))
 }

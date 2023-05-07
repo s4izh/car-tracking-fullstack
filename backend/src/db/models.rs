@@ -54,7 +54,7 @@ pub struct NewBdTrip<'a> {
 
 #[derive(Queryable, Debug, Clone)]
 #[diesel(table_name = car_data)]
-pub struct DbCarData{
+pub struct BdCarData{
     pub id: i32,
     pub timestamp: String,
     pub trouble_codes: String,
@@ -68,17 +68,18 @@ pub struct DbCarData{
     pub fuel_consumption: i32,
 }
 
-// #[derive(Insertable)]
-// #[diesel(table_name = car_data)]
-// pub struct NewDbCarData<'a> {
-//     pub id: i32,
-//     pub timestamp: &'a str,
-//     pub speed: i32,
-//     pub rpm: i32,
-//     pub throttle: i32,
-//     pub engine_load: i32,
-//     pub engine_coolant_temp: i32,
-//     pub oil_temp: i32,
-//     pub fuel_level: i32,
-//     pub fuel_consumption: i32,
-// }
+#[derive(Insertable)]
+#[diesel(table_name = car_data)]
+pub struct NewBdCarData<'a> {
+    pub id: i32,
+    pub trip: i32,
+    pub timestamp: &'a str,
+    pub speed: i32,
+    pub rpm: i32,
+    pub throttle: i32,
+    pub engine_load: i32,
+    pub engine_coolant_temp: i32,
+    pub oil_temp: i32,
+    pub fuel_level: i32,
+    pub fuel_consumption: i32,
+}
