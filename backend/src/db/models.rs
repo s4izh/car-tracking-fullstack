@@ -1,11 +1,6 @@
-// use crate::schema::*;
 use diesel::{Queryable, Insertable};
-use diesel::Expression;
 use chrono::NaiveDateTime;
 use crate::db::schema::{users,trips,car_data};
-// use diesel::sql_types::i32;
-// use diesel::sql_types::i32;
-// use core::i32;
 
 #[derive(Queryable, Debug, Clone)]
 #[diesel(table_name = users)]
@@ -56,8 +51,8 @@ pub struct NewBdTrip<'a> {
 #[diesel(table_name = car_data)]
 pub struct BdCarData{
     pub id: i32,
+    pub trip: i32,
     pub timestamp: String,
-    pub trouble_codes: String,
     pub speed: i32,
     pub rpm: i32,
     pub throttle: i32,

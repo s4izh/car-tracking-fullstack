@@ -25,19 +25,6 @@ pub struct TripData {
     pub data: Vec<common::CarData>,
 }
 
-// #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
-// pub struct CarData {
-//     pub timestamp: String,
-//     pub speed: i32,
-//     pub rpm: i32,
-//     pub throttle: f32,
-//     pub engine_load: f32,
-//     pub engine_coolant_temp: f32,
-//     pub oil_temp: f32,
-//     pub fuel_level: f32,
-//     pub fuel_consumption: f32,
-// }
-
 #[get("/")]
 async fn index() -> impl Responder {
     HttpResponse::Ok().body("Hello from mobile endpoint!")
@@ -133,6 +120,5 @@ async fn add_trip(
             .expect("Error inserting car_data");
     });
 
-    // HttpResponse::Ok().json(trip_data.into_inner())
     HttpResponse::Ok().body(format!("{}", trip_num))
 }
