@@ -44,3 +44,13 @@ Useful commands:
 ```bash
 make frontend-run # compiles and runs the frontend
 ```
+
+### Useful docker commands 
+
+Removing everything:
+
+```bash
+docker rm -f $(docker ps -aq)
+docker rmi -f $(docker images -aq)
+docker volume rm $(docker volume ls -q)
+```
