@@ -170,7 +170,6 @@ async fn get_trips(
         .collect::<Vec<common::Trip>>();
 
     let user_data = common::User {
-        // matricula: mat.to_string();
         matricula: mat.to_string(),
         total_km: result.as_ref().unwrap().total_km,
         trip: result.as_ref().unwrap().trip,
@@ -178,6 +177,5 @@ async fn get_trips(
         trip_data: trips,
     };
 
-    // Ok(HttpResponse::Ok().json(user_data.into_inner()))
     Ok(HttpResponse::Ok().json(user_data))
 }
