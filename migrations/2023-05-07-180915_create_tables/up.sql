@@ -34,6 +34,6 @@ CREATE TABLE car_data (
   oil_temp            INT           NOT NULL,
   fuel_level          INT           NOT NULL,
   fuel_consumption    INT           NOT NULL,
-  PRIMARY KEY (id, timestamp)
+  PRIMARY KEY (id, trip, timestamp)
 );
 

@@ -23,11 +23,12 @@ pub struct Trip {
     pub fuel_percentage: f64, // fuel %
     pub duration: i32, // seconds
     pub trouble_codes: String,
-    pub data: Vec<CarData>,
+    pub date_created: chrono::NaiveDateTime,
+    pub data: Vec<Data>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
-pub struct CarData {
+pub struct Data {
     pub timestamp: String,
     pub speed: i32,
     pub rpm: i32,

@@ -22,7 +22,7 @@ pub struct TripData {
     pub fuel_percentage: f64, // fuel %
     pub duration: i32, // seconds
     pub trouble_codes: String,
-    pub data: Vec<common::CarData>,
+    pub data: Vec<common::Data>,
 }
 
 #[get("/")]
@@ -31,7 +31,7 @@ async fn index() -> impl Responder {
 }
 
 #[post("/send-data")]
-async fn send_data(car_data: Json<common::CarData>) -> impl Responder {
+async fn send_data(car_data: Json<common::Data>) -> impl Responder {
     HttpResponse::Ok().json(car_data.into_inner())
 }
 

@@ -1,7 +1,7 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    car_data (id, timestamp) {
+    car_data (id, trip, timestamp) {
         id -> Integer,
         trip -> Integer,
         timestamp -> Varchar,
