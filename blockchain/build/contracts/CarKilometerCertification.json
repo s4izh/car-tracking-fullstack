@@ -911,10 +911,10 @@
                             "name": "require",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [
-                              159,
-                              160
+                              192,
+                              193
                             ],
-                            "referencedDeclaration": 160,
+                            "referencedDeclaration": 193,
                             "src": "1024:7:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -1102,7 +1102,7 @@
                               "name": "block",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 146,
+                              "referencedDeclaration": 179,
                               "src": "1258:5:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_block",
@@ -1230,7 +1230,7 @@
                                   "name": "block",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 146,
+                                  "referencedDeclaration": 179,
                                   "src": "969:5:0",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_magic_block",
@@ -2904,7 +2904,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 146,
+                                              "referencedDeclaration": 179,
                                               "type": "block",
                                               "value": "block"
                                             },
@@ -2969,10 +2969,10 @@
                                         }
                                       ],
                                       "overloadedDeclarations": [
-                                        159,
-                                        160
+                                        192,
+                                        193
                                       ],
-                                      "referencedDeclaration": 160,
+                                      "referencedDeclaration": 193,
                                       "type": "function (bool,string memory) pure",
                                       "value": "require"
                                     },
@@ -3289,7 +3289,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 146,
+                                          "referencedDeclaration": 179,
                                           "type": "block",
                                           "value": "block"
                                         },
@@ -3967,7 +3967,7 @@
     }
   },
   "schemaVersion": "3.4.13",
-  "updatedAt": "2023-05-03T18:02:17.680Z",
+  "updatedAt": "2023-05-07T09:45:39.479Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
