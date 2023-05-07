@@ -27,6 +27,7 @@ backend-setup:
 	docker exec -ti backend make dev
 
 backend-deploy: ## deploy the backend (run inside the container)
+	diesel database setup
 	cargo build --release -p backend
 	cargo run -p backend
 

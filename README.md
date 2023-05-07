@@ -9,7 +9,8 @@ The endpoints documentation can be found [here](backend/test/README.md).
 Automatic deployment of all containers can be done with the following:
 
 ```bash
-docker-compose -f prod.yml up -d
+docker-compose -f prod.yml build
+docker-compose -f prod.yml up
 ```
 
 ## Running the development environment

@@ -104,6 +104,8 @@ services:
       - 3000:3000
     command:
       make frontend-deploy
+    # depends_on:
+    #   backend:
 
 volumes:
   db-data:
