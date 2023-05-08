@@ -29,7 +29,7 @@ curl -X POST -H "Content-Type: application/json" \
 
 For login in. 
 
-- Returns an HTTP OK and a login succesfull message.
+- Returns an HTTP OK and json with the user and the hash needed to further communication.
 - Returns an HTTP Bad Request error if the user doesn't exists or the password is wrong.
 - Returns an HTTP Internal Server error if something fails.
 
