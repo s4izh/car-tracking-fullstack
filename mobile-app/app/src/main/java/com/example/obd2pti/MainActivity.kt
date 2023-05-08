@@ -519,9 +519,10 @@ private const val LOCATION_PERMISSION_REQUEST_CODE = 2
              Toast.makeText(this, "Conectado a wifi", Toast.LENGTH_SHORT).show()
              exportDirectory.walk().forEach {
                  if (it.isFile) {
-                     val httpPostAsync = "https://httpbin.org/post"
+                     val httpPostAsync = "http://nattech.fib.upc.edu:40400/api/mobile/trip"
                          .httpPost()
                          .body(it.readText())
+                         .header("Content-Type", "application/json")
                          .responseString { request, response, result ->
                              when (result) {
                                  is Result.Failure -> {
@@ -550,12 +551,12 @@ private const val LOCATION_PERMISSION_REQUEST_CODE = 2
                  }
              }
          } else if (!onlyWiFi){
-                Toast.makeText(this, "No hay conexión a wifi", Toast.LENGTH_SHORT).show()
              exportDirectory.walk().forEach {
                  if (it.isFile) {
-                     val httpPostAsync = "https://httpbin.org/post"
+                     val httpPostAsync = "http://nattech.fib.upc.edu:40400/api/mobile/trip"
                          .httpPost()
                          .body(it.readText())
+                         .header("Content-Type", "application/json")
                          .responseString { request, response, result ->
                              when (result) {
                                  is Result.Failure -> {
@@ -584,7 +585,7 @@ private const val LOCATION_PERMISSION_REQUEST_CODE = 2
              }
      }
          ficherosSubidos.forEach(){
-             //it.delete()
+             it.delete()
              Toast.makeText(this, "Borrando ${it.name}", Toast.LENGTH_SHORT).show()
          }
 
