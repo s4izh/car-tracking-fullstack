@@ -47,7 +47,7 @@ services:
     environment:
       - DATABASE_URL=mysql://db:db@mariadb/db
       - BACKEND_PORT=8080
-      - BLOCKCHAIN_CLIENT_URL=http://blockchain-client:5000/
+      - BLOCKCHAIN_CLIENT_URL=http://blockchain-client:5000
       - RUST_LOG=debug
       - CARGO_HOME=/app/.cargo
       - CARGO_TARGET_DIR=/app/target
