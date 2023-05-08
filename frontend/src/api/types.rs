@@ -26,6 +26,28 @@ pub struct UserData2 {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
+pub struct UserTrip {
+    pub matricula: String,
+    pub total_km: i32,
+    pub trip: i32,
+    pub date_created: chrono::NaiveDateTime,
+    pub trip_data: Vec<Trip>,
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
+pub struct Trip {
+    pub km: i32, // km
+    pub max_speed: i32, // km/h
+    pub speed_average: f64, // km/h
+    pub fuel_percentage: f64, // fuel %
+    pub duration: i32, // seconds
+    pub trouble_codes: String,
+    pub date_created: chrono::NaiveDateTime,
+    pub data: Vec<CarGeneralData>,
+}
+
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct CarGeneralData {
     pub timestamp: String,
     pub speed: i32,

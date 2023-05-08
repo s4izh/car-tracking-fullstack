@@ -2,18 +2,23 @@ use std::cell::RefCell;
 use std::ops::Deref;
 use std::rc::Rc;
 
+
 use crate::api::user_api::api_login_user;
+use crate::api::user_api::api_get_trip;
 use crate::components::{form_input::FormInput, loading_button::LoadingButton};
 use crate::router::{self, Route};
-use crate::store::{set_page_loading, set_show_alert, Store};
+use crate::store::{set_page_loading, set_show_alert, set_login_user, set_trip_info, Store};
 
 use serde::{Deserialize, Serialize};
 use validator::{Validate, ValidationErrors};
 use wasm_bindgen_futures::spawn_local;
 use web_sys::HtmlInputElement;
+
 use yew::prelude::*;
 use yew_router::prelude::*;
 use yewdux::prelude::*;
+
+use gloo::console;
 
 #[derive(Validate, Debug, Default, Clone, Serialize, Deserialize)]
 
@@ -24,10 +29,12 @@ struct LoginUserSchema {
     matricula: String,
     #[validate(
         length(min = 1, message = "Password is required"),
-        length(min = 6, message = "Password must be at least 6 characters")
+        length(min = 5, message = "Password must be at least 5 characters")
     )]
     hash: String,
 }
+
+
 
 fn get_input_callback(
     name: &'static str,
@@ -50,6 +57,8 @@ pub fn login_page() -> Html {
     let form = use_state(|| LoginUserSchema::default());
     let validation_errors = use_state(|| Rc::new(RefCell::new(ValidationErrors::new())));
     let navigator = use_navigator().unwrap();
+    let user_data=store.login_user.clone();
+    let trip_info=store.trip_info.clone();
 
     let email_input_ref = NodeRef::default();
     let password_input_ref = NodeRef::default();
@@ -127,10 +136,24 @@ pub fn login_page() -> Html {
                         password_input.set_value("");
 
                         let form_json = serde_json::to_string(&form_data).unwrap();
+                        let res2 = api_get_trip(&form_json).await;
+                        match res2 {
+                            Ok(res2) => {
+                                //set_trip_info(Some(res2),dispatch.clone());
+                                set_trip_info(Some(res2));
+                                console::log!("ENTRO");
+                                
+                            }
+                            Err(e) => {
+                                console::log!("Error {}", e);
+                            }
+                        };
                         let res = api_login_user(&form_json).await;
                         match res {
-                            Ok(_) => {
+                            Ok(res) => {
+                                set_login_user(Some(res),dispatch.clone());
                                 set_page_loading(false, dispatch);
+                                
                                 navigator.push(&router::Route::CarPage);
                             }
                             Err(e) => {

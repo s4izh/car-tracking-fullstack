@@ -1,10 +1,11 @@
-use super::types::{ErrorResponse, User, UserLoginResponse, UserResponse, CarGeneralData, UserData2};
+use super::types::{ErrorResponse, User, UserLoginResponse, UserResponse, CarGeneralData, UserData2, Trip, UserTrip};
 use reqwasm::http;
 use gloo::console;
 use serde_json::Value;
 
 
 // Devuelve un Result ocn un JSONResponse o un String 
+
 
 pub async fn api_car() -> Result<CarGeneralData, String> {
 
@@ -40,7 +41,32 @@ pub async fn api_car() -> Result<CarGeneralData, String> {
     }
 } 
     
+pub async fn api_get_trip(user_data: &str) -> Result<UserTrip, String> {
+    let response = match http::Request::post("http://localhost:8080/api/frontend/get-trips")
+        .header("Content-Type", "application/json")
+        .body(user_data)
+        .send()
+        .await
+    {
+        Ok(res) => res,
+        Err(_) => return Err("Failed to make request".to_string()),
+    };
 
+    if response.status() != 200 {
+        let error_response = response.json::<ErrorResponse>().await;
+        if let Ok(error_response) = error_response {
+            return Err(error_response.message);
+        } else {
+            return Err(format!("API error: {}", response.status()));
+        }
+    }
+
+    let res_json = response.json().await;
+    match res_json {
+        Ok(data) => Ok(data),
+        Err(_) => Err("Failed to parse response".to_string()),
+    }
+}
 
 pub async fn api_register_user(user_data: &str) -> Result<String, String> {
     let response = match http::Request::post("http://localhost:8080/api/create-user")
