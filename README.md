@@ -54,6 +54,10 @@ Useful commands:
 make frontend-run # compiles and runs the frontend
 ```
 
+## Running the blockchain locally
+
+Info can be found [here](blockchain/README.org)
+
 ### Useful docker commands 
 
 Removing everything:
