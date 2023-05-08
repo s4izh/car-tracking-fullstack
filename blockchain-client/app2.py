@@ -3,21 +3,16 @@ import requests  # create persistent HTTP connection
 import os
 import web3
 import time
+import traceback
 
 app = Flask(__name__)
 
 # create persistent HTTP connection
 session = requests.Session()
+
 w3 = web3.Web3()
 
 
-requestId = 0  # is automatically incremented at each request
-
-myAccount = w3.eth.account.create('entropia que te cagas')
-myAddress = myAccount.address
-myPrivateKey = myAccount._private_key
-print('my address is     : {}'.format(myAccount.address))
-print('my private key is : {}'.format(myPrivateKey.hex()))
 URL= "http://localhost:7545"
 
 
@@ -43,12 +38,6 @@ def postJSONRPCRequestObject(_HTTPEnpoint, _jsonRPCRequestObject):
 
 ''' ================= SEND A TRANSACTION TO SMART CONTRACT  ================'''
 def send_certificate_request(matricula, km):
-    # Convierte la matrícula y los kilómetros en formato compatible con Solidity
-    license_plate_bytes = matricula.encode('utf-8')
-    kilometer = km
-
-    # Conecta a la red de blockchain
-    w3 = web3.Web3(web3.HTTPProvider(os.environ[BLOCKCHAIN_URL]))
 
     # Carga el contrato desde su dirección
     contract_address = web3.Web3.toChecksumAddress('0x24AfeC5C0CaFD7410d3dFAfeBc1DeCDF3c6b5BB2')
@@ -157,39 +146,56 @@ def send_certificate_request(matricula, km):
           "type": "function"
         }
       ]  # Abi del contrato
-    contract = w3.eth.contract(address=contract_address, abi=contract_abi)
 
+    #cuenta disponible generada por ganache
+    myAddress = '0xa15932e971a00e91E68bA168b617aE3a061aE8f2'
+    myPrivateKey = '0x4f88a384b563428fab14df0c6593bbf0c3f263d32776c291d9f1aedafa3ffaa2'
+
+    requestId = 1
+    requestObject, requestId = createJSONRPCRequestObject('eth_getTransactionCount', [myAddress, 'latest'], requestId)
+    responseObject = postJSONRPCRequestObject(URL, requestObject)
+    nonce = w3.toInt(hexstr=responseObject['result'])
+    
     # Construye los datos de la transacción
     function_signature = 'certifyKilometer(string,uint256)'
-    function_inputs = [license_plate_bytes, kilometer]
+    methodId = w3.sha3(text=function_signature)[0:4].hex()
     function_encoded = contract.encode_function_call(fn_name=function_signature, args=function_inputs)
-    nonce = w3.eth.getTransactionCount(myAddress)
-    gas_price = w3.eth.gasPrice
-    gas_limit = 100000  # Este valor depende de la complejidad de la función
-    value = 0  # No se requiere valor para esta transacción
-    chain_id = w3.eth.chainId
+    param1 = (matricula).to_bytes(32, byteorder='big').hex()
+    param2 = (km).to_bytes(32, byteorder='big').hex()
+    data = '0x' + methodId + param1 + param2
 
     # Construye la transacción firmada
     transaction = {
         'nonce': nonce,
-        'gasPrice': gas_price,
-        'gas': gas_limit,
+        'gasPrice': 1,
+        'gas': 100000,
         'to': contract_address,
-        'value': value,
-        'chainId': chain_id,
+        'value': 0,
+        'chainId': 1337,
         'data': function_encoded,
     }
     signed_txn = w3.eth.account.sign_transaction(transaction, private_key=myPrivateKey)
+    params = [signed_txn.rawTransaction.hex()]
 
     # Envía la transacción a la red de blockchain
-    tx_hash = w3.eth.sendRawTransaction(signed_txn.rawTransaction)
-    tx_receipt = w3.eth.waitForTransactionReceipt(tx_hash)
+    requestObject, requestId = createJSONRPCRequestObject('eth_sendRawTransaction', params, requestId)
+    responseObject = postJSONRPCRequestObject(URL, requestObject)
+    transactionHash = responseObject['result']
 
-    # Verifica que la transacción fue procesada correctamente
-    if tx_receipt.status == 1:
-        print('Transacción exitosa')
-    else:
-        print('Transacción fallida')
+    ### wait for the transaction to be mined
+    while(True):
+    requestObject, requestId = createJSONRPCRequestObject('eth_getTransactionReceipt', [transactionHash], requestId)
+    responseObject = postJSONRPCRequestObject(URL, requestObject)
+    receipt = responseObject['result']
+    if(receipt is not None):
+        if(receipt['status'] == '0x1'):
+            print('transaction successfully mined')
+            break
+        else:
+            pp.pprint(responseObject)
+            raise ValueError("Error al esperar la confirmación de la transacción")
+    time.sleep(1)
+
 
 
 @app.route('/')
