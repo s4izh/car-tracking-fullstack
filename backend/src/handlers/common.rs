@@ -27,7 +27,7 @@ async fn login(
             .body(format!("Error finding user")),
     }
 
-    HttpResponse::Ok().body("Login successful")
+    HttpResponse::Ok().json(user.into_inner())
 }
 
 #[post("/create-user")]
