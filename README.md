@@ -56,7 +56,7 @@ make frontend-run # compiles and runs the frontend
 
 ## Running the blockchain locally
 
-Info can be found [here](blockchain/README.org)
+Info can be found [here](blockchain/Readme.org)
 
 ### Useful docker commands 
 
