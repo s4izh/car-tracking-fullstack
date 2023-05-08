@@ -88,7 +88,7 @@ services:
     stdin_open: true
     tty: true
     environment:
-      - BACKEND_URL=http://backend:8080
+      - BACKEND_URL=http://nattech.fib.upc.edu:40400
       - RUST_LOG=debug
       - CARGO_HOME=/app/.cargo
       - CARGO_TARGET_DIR=/app/target
@@ -101,9 +101,9 @@ services:
       - "target:/app/target"
       - "rustup:/app/.rustup"
     ports:
-      - 3000:3000
+      - 8081:8081
     command:
-      make frontend-deploy
+      make frontend-run
     # depends_on:
     #   backend:
 

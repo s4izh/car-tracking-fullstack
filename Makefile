@@ -28,11 +28,10 @@ backend-setup:
 
 backend-deploy: ## deploy the backend (run inside the container)
 	diesel database setup
-	cargo build --release -p backend
 	cargo run -p backend
 
 frontend-run: ## run the frontend (run inside the container)
-	cd frontend && trunk serve --address 0.0.0.0 --port 3000
+	cd frontend && trunk serve --address 0.0.0.0 --port 8081
 
 frontend-build:
 	cd frontend && trunk build --release
