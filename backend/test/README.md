@@ -3,7 +3,10 @@
 Use the scripts in this directory to fill the database 
 with some data for testing.
 
+The variable `BACKEND_URL` must be set, example:
+
 ```sh
+export BACKEND_URL=localhost:8080
 ./create_user # create the user
 ./send_trips # send multiple trips
 ./get_trips # get a json with all the trips
@@ -22,7 +25,7 @@ For creating an user.
 ```sh
 curl -X POST -H "Content-Type: application/json" \
   -d '{"matricula":"100000","hash":"abcde"}' \
-  http://localhost:8080/api/create-user
+  http://$BACKEND_URL/api/create-user
 ```
 
 #### `api/login`
@@ -36,7 +39,7 @@ For login in.
 ```sh
 curl -i -X POST -H "Content-Type: application/json" \
   -d '{"matricula":"100000","hash":"abcde"}' \
-  http://localhost:8080/api/login
+  http://$BACKEND_URL/api/login
 ```
 
 ## Endpoints meant to be accessed from the frontend
@@ -52,7 +55,7 @@ Returns a json with all the information of all the trips of a given user.
 ```sh
 curl -X POST -H "Content-Type: application/json" \
   -d '{"matricula":"100000","hash":"abcde"}' \
-  http://localhost:8080/api/frontend/get-trips
+  http://$BACKEND_URL/api/frontend/get-trips
 ```
 
 #### `api/frontend/certificate`
@@ -66,7 +69,7 @@ It cerficates current km at the blockchain.
 ```sh
 curl -i -X POST -H "Content-Type: application/json" \
   -d '{"matricula":"100000","hash":"abcde"}' \
-  http://localhost:8080/api/frontend/certificate
+  http://$BACKEND_URL/api/frontend/certificate
 ```
 
 #### `api/frontend/test`
@@ -74,7 +77,7 @@ curl -i -X POST -H "Content-Type: application/json" \
 For testing, always return the same response.
 
 ```sh
-curl -i localhost:8080/api/frontend/test
+curl -i $BACKEND_URL/api/frontend/test
 ```
 
 ## Endpoints meant to be accessed from the mobile app
@@ -89,5 +92,5 @@ For sending the info of a trip.
 ```sh
 curl -i -X POST \ -H "Content-Type: application/json" \
   -d @trip.json \
-  http://localhost:8080/api/mobile/trip
+  http://$BACKEND_URL/api/mobile/trip
 ```

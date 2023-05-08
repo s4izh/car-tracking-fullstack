@@ -1,0 +1,3 @@
+#!/bin/sh
+
+export BACKEND_URL=nattech.fib.upc.edu:40400

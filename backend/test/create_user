@@ -2,4 +2,4 @@
 
 curl -i -X POST -H "Content-Type: application/json" \
   -d '{"matricula":"100000","hash":"abcde"}' \
-  http://localhost:8080/api/create-user
+  http://$BACKEND_URL/api/create-user

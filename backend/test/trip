@@ -3,4 +3,4 @@
 curl -X POST \
   -H "Content-Type: application/json" \
   -d @trip.json \
-  http://localhost:8080/api/mobile/trip
+  http://$BACKEND_URL/api/mobile/trip

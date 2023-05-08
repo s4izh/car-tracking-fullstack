@@ -8,7 +8,7 @@ Endpoint for testing, always returns the same =json=
 
 #+name: /api/frontend/test
 #+begin_src restclient :exports
-  GET http://localhost:8080/api/frontend/test
+  GET http://$BACKEND_URL/api/frontend/test
 #+end_src
 
 #+name: /api/frontend/test
@@ -26,7 +26,7 @@ Endpoint for testing, always returns the same =json=
   "fuel_level": 12.0,
   "fuel_consumption": 8.0
 }
-// GET http://localhost:8080/api/frontend/test
+// GET http://$BACKEND_URL/api/frontend/test
 // HTTP/1.1 200 OK
 // content-length: 204
 // content-type: application/json
@@ -41,7 +41,7 @@ Endpoint for testing, always returns the same =json=
 **** =/api/frontend/create-user=
 #+name: /api/frontend/test
 #+begin_src sh
-  curl http://localhost:8080/api/frontend/create-user
+  curl http://$BACKEND_URL/api/frontend/create-user
 #+end_src
 
 ** Endpoints meant to be accessed from the mobile app

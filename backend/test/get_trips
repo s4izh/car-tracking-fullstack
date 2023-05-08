@@ -2,4 +2,4 @@
 
 curl -X POST -H "Content-Type: application/json" \
   -d '{"matricula":"100000","hash":"abcde"}' \
-  http://localhost:8080/api/frontend/get-trips
+  http://$BACKEND_URL/api/frontend/get-trips
