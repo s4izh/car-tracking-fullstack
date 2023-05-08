@@ -1,4 +1,4 @@
-use actix_web::{get, post, web, web::Json, HttpResponse, Responder, error};
+use actix_web::{post, web, web::Json, HttpResponse, Responder};
 
 use diesel::{r2d2::{Pool, ConnectionManager}, MysqlConnection};
 use diesel::{RunQueryDsl, QueryDsl};
@@ -6,7 +6,6 @@ use diesel::ExpressionMethods;
 use crate::db::{models, schema};
 use crate::db::schema::{users::dsl::users, trips::dsl::trips};
 
-// use crate::db::schema::trips;
 use crate::db::models::BdUser;
 use crate::db::schema::users::{matricula, hash, trip, total_km};
 
@@ -23,16 +22,6 @@ pub struct TripData {
     pub duration: i32, // seconds
     pub trouble_codes: String,
     pub data: Vec<common::Data>,
-}
-
-#[get("/")]
-async fn index() -> impl Responder {
-    HttpResponse::Ok().body("Hello from mobile endpoint!")
-}
-
-#[post("/send-data")]
-async fn send_data(car_data: Json<common::Data>) -> impl Responder {
-    HttpResponse::Ok().json(car_data.into_inner())
 }
 
 #[post("/trip")]

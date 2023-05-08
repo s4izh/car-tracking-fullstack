@@ -1,9 +1,9 @@
-use actix_web::{get, post, web, web::Json, HttpResponse, Responder, error};
+use actix_web::{post, web, web::Json, HttpResponse, Responder};
 
 use diesel::r2d2::{Pool, ConnectionManager};
 use diesel::{MysqlConnection, RunQueryDsl, QueryDsl, ExpressionMethods};
 use crate::db::schema::users::dsl::users;
-use crate::db::{models, schema};
+use crate::db::models;
 
 use crate::db::models::BdUser;
 use crate::db::schema::users::{matricula, hash};

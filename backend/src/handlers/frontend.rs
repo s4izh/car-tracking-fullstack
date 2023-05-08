@@ -2,32 +2,8 @@ use actix_web::{error, get, post, web, web::Json, HttpResponse, Responder};
 
 use diesel::r2d2::{ConnectionManager, Pool};
 use diesel::{ExpressionMethods, MysqlConnection, QueryDsl, RunQueryDsl};
-
-// use crate::db::schema::users::dsl::users;
-// use crate::db::schema::trips::dsl::trips;
-// use crate::db::schema::car_data::dsl::car_data;
 use crate::db::{models, schema};
-
-// use crate::db::models;
-// use crate::db::models::BdTrip;
-// use crate::db::models::BdCarData;
-
-use crate::db::schema::users::{hash, matricula, total_km};
-// use crate::db::schema::trips;
-// use crate::db::schema::car_data;
-// use crate::db::schema::car_data::{id};
-
-use diesel::prelude::*;
-
-#[get("/")]
-async fn index() -> impl Responder {
-    HttpResponse::Ok().body("Hello from frontend!")
-}
-
-#[get("/get-data")]
-async fn get_data() -> impl Responder {
-    HttpResponse::Ok()
-}
+use crate::db::schema::users::{hash, matricula};
 
 #[get("/test")]
 async fn test() -> impl Responder {

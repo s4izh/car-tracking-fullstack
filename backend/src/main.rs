@@ -52,16 +52,12 @@ async fn main() -> std::io::Result<()> {
                 scope("/api")
                     .service(
                         scope("/frontend")
-                            .service(frontend::index)
-                            .service(frontend::get_data)
                             .service(frontend::test)
                             .service(frontend::certificate)
                             .service(frontend::get_trips)
                     )
                     .service(
                         scope("/mobile")
-                            .service(mobile::index)
-                            .service(mobile::send_data)
                             .service(mobile::add_trip)
                     )
                     .service(common::create_user)
