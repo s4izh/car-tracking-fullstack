@@ -9,7 +9,7 @@
 
 - Compila los contratos desde la raíz del proyecto.
 #+begin_src sh
-  truffle complie
+  truffle compile
 #+end_src
 
 - En una terminal, desde la raíz del proyecto, despliega los contratos en la red local.

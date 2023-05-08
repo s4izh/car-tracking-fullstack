@@ -75,7 +75,8 @@ class NotificationsFragment : Fragment() {
             }
             //Write text to file
             file2.writeText("");
-            file2.writeText(passwordHash)
+            //file2.writeText(passwordHash)
+            file2.writeText(password)
             Toast.makeText(context, "Usuario Registrado", Toast.LENGTH_SHORT).show()
         }
         checkBoxWiFi.setOnClickListener{
