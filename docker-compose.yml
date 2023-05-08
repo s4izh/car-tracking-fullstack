@@ -63,10 +63,8 @@ services:
     expose:
       - 8080
     depends_on:
-      # - mariadb
       mariadb:
         condition: service_healthy
-    # command: cargo make --profile docker backend-run
 
   frontend:
     container_name: frontend
