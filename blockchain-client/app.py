@@ -1,7 +1,7 @@
 from flask import Flask, request
 import requests  # create persistent HTTP connection
 import os
-import web3 import Web3
+from web3 import Web3
 import time
 import traceback
 
@@ -9,11 +9,6 @@ app = Flask(__name__)
 
 # create persistent HTTP connection
 session = requests.Session()
-
-w3 = web3.Web3()
-
-URL= "http://localhost:7545"
-
 
 ''' ================= SEND A TRANSACTION TO SMART CONTRACT  ================'''
 def send_certificate_request(matricula, km):
@@ -172,3 +167,4 @@ def certificate_handler():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+

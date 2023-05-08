@@ -1,3 +1,8 @@
+#ARCHIVO PARA TESTEAR LA INSERCION DE DATOS EN LA BLOCKCHAIN
+###INSERTA LA MATRICULA Y KM A CERTIFICAR###
+matricula = 'ricard'
+km = 725
+
 from web3 import Web3
 URL= "http://localhost:7545"
 contractAddress = '0x24AfeC5C0CaFD7410d3dFAfeBc1DeCDF3c6b5BB2'
@@ -117,8 +122,6 @@ myPrivateKey = '0x4f88a384b563428fab14df0c6593bbf0c3f263d32776c291d9f1aedafa3ffa
     # Obtener el nonce de la cuenta
 nonce = w3.eth.get_transaction_count(myAddress)
 
-matricula = 'ricard'
-km = 725
     # Obtiene el contrato y crea la transacción
 contract = w3.eth.contract(address=contractAddress, abi=contractAbi)
 encoded_function_call = contract.functions.certifyKilometer(matricula, km).build_transaction({
