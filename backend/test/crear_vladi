@@ -1,0 +1,5 @@
+#!/bin/sh
+
+curl -i -X POST -H "Content-Type: application/json" \
+  -d '{"matricula":"5038LML","hash":"password1234"}' \
+  http://$BACKEND_URL/api/create-user
