@@ -22,21 +22,6 @@ services:
       timeout: 10s
       retries: 3
 
-  # truffle:
-  #   container_name: truffle
-  #   stdin_open: true
-  #   tty: true
-  #   build:
-  #     context: blockchain
-  #   volumes:
-  #     - .:/app
-  #   expose:
-  #     - 7545
-  #     - 8545
-  #   ports:
-  #     - 7545:7545
-  #     - 3000:8081
-
   blockchain-client:
     container_name: blockchain-client
     stdin_open: true
