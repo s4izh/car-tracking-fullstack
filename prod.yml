@@ -37,7 +37,6 @@ services:
       - 5000:5000
     expose:
       - 5000
-    network_mode: host
     command: python app.py
 
   blockchain:
