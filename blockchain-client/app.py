@@ -12,7 +12,7 @@ session = requests.Session()
 
 ''' ================= SEND A TRANSACTION TO SMART CONTRACT  ================'''
 def send_certificate_request(matricula, km):
-  URL= "http://localhost:7545"
+  URL = "http://blockchain:7545"
   contractAddress = '0x24AfeC5C0CaFD7410d3dFAfeBc1DeCDF3c6b5BB2'
   contractAbi = [ 
       {

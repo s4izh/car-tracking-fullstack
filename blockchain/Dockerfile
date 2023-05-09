@@ -1,42 +1,27 @@
 # Imagen base
-FROM node:14.18.1
+FROM ubuntu:latest
 
 # Establecer el directorio de trabajo
-WORKDIR /app
+# WORKDIR /app/workdir
 
-# Instalar Ganache
+RUN apt update
+RUN apt install curl -y
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt update
+RUN apt install nodejs -y
+RUN apt install build-essential -y
+RUN apt install tmux -y
+
 RUN npm install -g ganache-cli
-
-#Instalar Truffle
 RUN npm install -g truffle@5.4.23
 
-# Copiar los archivos necesarios
-COPY package*.json ./
-COPY truffle-config.js ./
-COPY contracts ./contracts
-COPY migrations ./migrations
-COPY src ./src
-COPY bs-config.json ./
+# CMD ganache-cli -p 7545 -i 5777 -h 0.0.0.0 -m "tu frase semilla de ganache" --db ganache-data
 
+# CMD sleep 5
 
-# Instalar las dependencias
-RUN npm install
+# # RUN truffle migrate --network development --reset
 
-# Exponer el puerto necesario para la aplicación
-EXPOSE 3000 7545 8545
-
-# Ejecutar el ganache
-# al usar la frase de semilla los contratos siempre se instancian en 0x24AfeC5C0CaFD7410d3dFAfeBc1DeCDF3c6b5BB2
-CMD ganache-cli -p 7545 -i 5777 -h 0.0.0.0 -m "tu frase semilla de ganache" --db /ganache-data
-
-# Esperar a que Ganache se inicie correctamente
-RUN sleep 5
-
-# Compilar contratos
-RUN truffle compile
-
-# Ejecutar el comando "truffle migrate" para migrar los contratos a la red de Ganache
-RUN truffle migrate --network development --reset
+# CMD truffle migrate --reset
 
 # Comando a ejecutar al arrancar el contenedor
-CMD ["npm", "run", "dev"]
+# CMD ["npm", "run", "dev"]

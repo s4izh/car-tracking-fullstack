@@ -31,14 +31,30 @@ services:
     working_dir: /app/blockchain-client
     volumes:
       - ".:/app"
-    # environment:
-    #   - BLOCKCHAIN_URL=http://blockchain:7545
+    environment:
+      - BLOCKCHAIN_URL=http://blockchain:7545
     ports:
       - 5000:5000
     expose:
       - 5000
-    network_mode: host
     command: python app.py
+
+  blockchain:
+    container_name: blockchain
+    stdin_open: true
+    tty: true
+    build:
+      context: blockchain
+    working_dir: /app/blockchain
+    volumes:
+      - ".:/app"
+      - "ganache-data:/app/ganache-data"
+    ports:
+      - 7545:7545
+      - 3000:8082
+    expose:
+      - 7545
+      - 3000
 
   backend:
     container_name: backend
@@ -91,3 +107,4 @@ volumes:
   cargo:
   target:
   rustup:
+  ganache-data:
