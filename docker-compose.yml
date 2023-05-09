@@ -51,7 +51,7 @@ services:
       - "ganache-data:/app/ganache-data"
     ports:
       - 7545:7545
-      - 3000:8082
+      - 8082:3000
     expose:
       - 7545
       - 3000
