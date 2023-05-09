@@ -34,7 +34,7 @@ services:
     environment:
       - BLOCKCHAIN_URL=http://blockchain:7545
     ports:
-      - 5000:5000
+      - 8085:5000
     expose:
       - 5000
     command: python app.py
