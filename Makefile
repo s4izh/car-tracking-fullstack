@@ -66,7 +66,3 @@ truffle:
 	docker exec -ti blockchain truffle compile 
 	docker exec -ti blockchain truffle migrate --reset
 	docker exec -ti blockchain npm run dev
-	
-block: ganache truffle
-
-
