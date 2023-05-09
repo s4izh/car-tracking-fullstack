@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 /*
-! tailwindcss v3.1.4 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.2 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -32,6 +32,8 @@
 2. Prevent adjustments of font size after orientation changes in iOS.
 3. Use a more readable tab size.
 4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
 */
 
 html {
@@ -46,6 +48,10 @@ html {
   /* 3 */
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
+  font-feature-settings: normal;
+  /* 5 */
+  font-variation-settings: normal;
+  /* 6 */
 }
 
 /*
@@ -412,6 +418,12 @@ video {
   height: auto;
 }
 
+/* Make elements with the HTML hidden attribute stay hidden by default */
+
+[hidden] {
+  display: none;
+}
+
 *, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -426,6 +438,9 @@ video {
   --tw-pan-y:  ;
   --tw-pinch-zoom:  ;
   --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
   --tw-ordinal:  ;
   --tw-slashed-zero:  ;
   --tw-numeric-figure:  ;
@@ -473,6 +488,9 @@ video {
   --tw-pan-y:  ;
   --tw-pinch-zoom:  ;
   --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
   --tw-ordinal:  ;
   --tw-slashed-zero:  ;
   --tw-numeric-figure:  ;
@@ -528,16 +546,16 @@ video {
   position: fixed;
 }
 
-.top-\[5\.5rem\]{
-  top: 5.5rem;
+.right-10{
+  right: 2.5rem;
 }
 
 .top-14{
   top: 3.5rem;
 }
 
-.right-10{
-  right: 2.5rem;
+.top-\[5\.5rem\]{
+  top: 5.5rem;
 }
 
 .mx-auto{
@@ -545,20 +563,20 @@ video {
   margin-right: auto;
 }
 
-.mr-2{
-  margin-right: 0.5rem;
-}
-
 .mb-3{
   margin-bottom: 0.75rem;
 }
 
-.mt-8{
-  margin-top: 2rem;
-}
-
 .mb-4{
   margin-bottom: 1rem;
+}
+
+.mr-2{
+  margin-right: 0.5rem;
+}
+
+.mt-8{
+  margin-top: 2rem;
 }
 
 .block{
@@ -585,16 +603,16 @@ video {
   height: 5rem;
 }
 
-.h-full{
-  height: 100%;
-}
-
 .h-5{
   height: 1.25rem;
 }
 
 .h-\[20rem\]{
   height: 20rem;
+}
+
+.h-full{
+  height: 100%;
 }
 
 .min-h-screen{
@@ -649,12 +667,12 @@ video {
   justify-content: space-between;
 }
 
-.gap-4{
-  gap: 1rem;
-}
-
 .gap-3{
   gap: 0.75rem;
+}
+
+.gap-4{
+  gap: 1rem;
 }
 
 .space-y-5 > :not([hidden]) ~ :not([hidden]){
@@ -667,12 +685,12 @@ video {
   overflow: hidden;
 }
 
-.rounded-full{
-  border-radius: 9999px;
-}
-
 .rounded-2xl{
   border-radius: 1rem;
+}
+
+.rounded-full{
+  border-radius: 9999px;
 }
 
 .rounded-lg{
@@ -696,24 +714,14 @@ video {
   border-color: rgb(249 115 22 / var(--tw-border-opacity));
 }
 
-.bg-white{
+.bg-\[\#ccc\]{
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(204 204 204 / var(--tw-bg-opacity));
 }
 
 .bg-blue-500{
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-}
-
-.bg-ct-yellow-600{
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 209 62 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#ccc\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(204 204 204 / var(--tw-bg-opacity));
 }
 
 .bg-ct-blue-600{
@@ -731,6 +739,16 @@ video {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
+.bg-ct-yellow-600{
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 209 62 / var(--tw-bg-opacity));
+}
+
+.bg-white{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .fill-blue-600{
   fill: #2563eb;
 }
@@ -739,19 +757,19 @@ video {
   padding: 2rem;
 }
 
-.px-5{
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-
-.py-4{
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .px-3{
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+
+.px-4{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.px-5{
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .py-1{
@@ -764,23 +782,19 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.px-4{
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
 .py-3{
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
 
+.py-4{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-
-.pt-4{
-  padding-top: 1rem;
 }
 
 .pl-2{
@@ -795,23 +809,12 @@ video {
   padding-top: 5rem;
 }
 
+.pt-4{
+  padding-top: 1rem;
+}
+
 .text-center{
   text-align: center;
-}
-
-.text-sm{
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.text-xs{
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
-.text-5xl{
-  font-size: 3rem;
-  line-height: 1;
 }
 
 .text-3xl{
@@ -824,9 +827,28 @@ video {
   line-height: 2.5rem;
 }
 
+.text-5xl{
+  font-size: 3rem;
+  line-height: 1;
+}
+
 .text-lg{
   font-size: 1.125rem;
   line-height: 1.75rem;
+}
+
+.text-sm{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-xs{
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.font-\[600\]{
+  font-weight: 600;
 }
 
 .font-extrabold{
@@ -837,28 +859,14 @@ video {
   font-weight: 600;
 }
 
-.font-\[600\]{
-  font-weight: 600;
-}
-
-.text-ct-yellow-600{
-  --tw-text-opacity: 1;
-  color: rgb(249 209 62 / var(--tw-text-opacity));
-}
-
-.text-white{
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .text-ct-blue-600{
   --tw-text-opacity: 1;
   color: rgb(35 99 235 / var(--tw-text-opacity));
 }
 
-.text-red-500{
+.text-ct-dark-200{
   --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
+  color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 
 .text-ct-dark-600{
@@ -866,9 +874,9 @@ video {
   color: rgb(34 34 34 / var(--tw-text-opacity));
 }
 
-.text-slate-500{
+.text-ct-yellow-600{
   --tw-text-opacity: 1;
-  color: rgb(100 116 139 / var(--tw-text-opacity));
+  color: rgb(249 209 62 / var(--tw-text-opacity));
 }
 
 .text-gray-200{
@@ -876,9 +884,19 @@ video {
   color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 
-.text-ct-dark-200{
+.text-red-500{
   --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
+
+.text-slate-500{
+  --tw-text-opacity: 1;
+  color: rgb(100 116 139 / var(--tw-text-opacity));
+}
+
+.text-white{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .shadow-lg{
