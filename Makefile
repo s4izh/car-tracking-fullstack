@@ -60,13 +60,13 @@ docker-down: ## kill docker containers
 setup: db-setup backend-setup
 
 ganache:
-	ganache-cli -p 7545 -i 5777 -h 0.0.0.0 -m "tu frase semilla de ganache" --db ganache-data 
+	docker exec -ti blockchain ganache-cli -p 7545 -i 5777 -h 0.0.0.0 -m "tu frase semilla de ganache" --db ganache-data 
 
 truffle:
-	truffle compile
-	truffle migrate --reset
-	npm run dev
-
+	docker exec -ti blockchain truffle compile 
+	docker exec -ti blockchain truffle migrate --reset
+	docker exec -ti blockchain npm run dev
+	
 block: ganache truffle
 
 
