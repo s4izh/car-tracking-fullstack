@@ -50,9 +50,11 @@ services:
       - ".:/app"
       - "ganache-data:/app/ganache-data"
     ports:
+      - 8084:8545
       - 8083:7545
       - 8082:3000
     expose:
+      - 8545
       - 7545
       - 3000
 
