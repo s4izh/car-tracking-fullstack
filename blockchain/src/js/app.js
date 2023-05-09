@@ -4,7 +4,7 @@ var App = {
 
   initWeb3: async function() {
     //conectar a Ganache  
-    App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+    App.web3Provider = new Web3.providers.HttpProvider('http://nattech.fib.upc.edu:40403');
   
     web3 = new Web3(App.web3Provider);
 
