@@ -1,0 +1,5 @@
+#!/bin/sh
+
+curl -i -X POST -H "Content-Type: application/json" \
+  -d '{"matricula":"ABC000","hash":"abcde"}' \
+  http://$BACKEND_URL/api/frontend/certificate

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+
+viajes=./trips
+
+# bucle por los .json
+for file in ${viajes}/*.json
+do
+  curl -X POST \
+    -H "Content-Type: application/json" \
+    -d @$file \
+    http://$BACKEND_URL/api/mobile/trip
+done
