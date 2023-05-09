@@ -58,3 +58,15 @@ docker-down: ## kill docker containers
 	docker-compose down
 
 setup: db-setup backend-setup
+
+ganache:
+	ganache-cli -p 7545 -i 5777 -h 0.0.0.0 -m "tu frase semilla de ganache" --db ganache-data 
+
+truffle:
+	truffle compile
+	truffle migrate --reset
+	npm run dev
+
+block: ganache truffle
+
+
