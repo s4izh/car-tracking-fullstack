@@ -4,7 +4,7 @@
 
 - Inicia ganache-cli .
  #+begin_src sh
-  ganache-cli -p 7545 -i 5777 -h 0.0.0.0 -m "tu frase semilla de ganache" --db ganache-data
+  ganache-cli -p 7545 -i 5777 -h 0.0.0.0 -m "tu frase semilla de ganache" 
 #+end_src
 
 - Compila los contratos desde la raíz del proyecto.
