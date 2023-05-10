@@ -1,5 +1,6 @@
+use std::sync::Arc;
+
 use crate::{
-  api::user_api::api_logout_user,
   router::{self, Route},
   store::{set_auth_user, set_page_loading, set_show_alert, Store},
 };
@@ -11,9 +12,9 @@ use yewdux::prelude::*;
 #[function_component(Header)]
 pub fn header_component() -> Html {
   let (store, dispatch) = use_store::<Store>();
-  let user = store.auth_user.clone();
+  let user = store.login_user.clone();
   let navigator = use_navigator().unwrap();
-
+ 
   let handle_logout = {
       let store_dispatch = dispatch.clone();
       let cloned_navigator = navigator.clone();
@@ -23,19 +24,13 @@ pub fn header_component() -> Html {
           let navigator = cloned_navigator.clone();
           spawn_local(async move {
               set_page_loading(true, dispatch.clone());
-              let res = api_logout_user().await;
-              match res {
-                  Ok(_) => {
                       set_page_loading(false, dispatch.clone());
                       set_auth_user(None, dispatch.clone());
                       set_show_alert("Logged out successfully".to_string(), dispatch);
+                      //Refresh the page
                       navigator.push(&router::Route::LoginPage);
-                  }
-                  Err(e) => {
-                      set_show_alert(e.to_string(), dispatch.clone());
-                      set_page_loading(false, dispatch);
-                  }
-              };
+                  
+  
           });
       })
   };
@@ -47,19 +42,10 @@ pub fn header_component() -> Html {
           <Link<Route> to={Route::HomePage} classes="text-ct-dark-600">{"Car Tracking"}</Link<Route>>
         </div>
         <ul class="flex items-center gap-4">
-          <li>
-            <Link<Route> to={Route::HomePage} classes="text-ct-dark-600">{"Home"}</Link<Route>>
-
-          </li>
           if user.is_some() {
              <>
               <li>
-                <Link<Route> to={Route::ProfilePage} classes="text-ct-dark-600">{"Profile"}</Link<Route>>
-              </li>
-              <li
-                class="cursor-pointer"
-              >
-                {"Create Post"}
+                <Link<Route> to={Route::CertificatePage} classes="text-ct-dark-600">{"Certificate"}</Link<Route>>
               </li>
               <li class="cursor-pointer" onclick={handle_logout}>
                 {"Logout"}

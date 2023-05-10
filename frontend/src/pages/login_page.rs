@@ -140,9 +140,7 @@ pub fn login_page() -> Html {
                         match res2 {
                             Ok(res2) => {
                                 //set_trip_info(Some(res2),dispatch.clone());
-                                set_trip_info(Some(res2));
-                                console::log!("ENTRO");
-                                
+                                set_trip_info(Some(res2));                        
                             }
                             Err(e) => {
                                 console::log!("Error {}", e);
@@ -158,7 +156,7 @@ pub fn login_page() -> Html {
                             }
                             Err(e) => {
                                 set_page_loading(false, dispatch.clone());
-                                set_show_alert(e.to_string(), dispatch);
+                                set_show_alert("License Plate or Password Incorrect".to_string(), dispatch);
                             }
                         };
                     }

@@ -152,9 +152,11 @@ pub async fn api_user_info() -> Result<User, String> {
     }
 }
 
-pub async fn api_logout_user() -> Result<(), String> {
-    let response = match http::Request::get("http://localhost:8000/api/auth/logout")
+pub async fn api_certificate(credentials: &str) -> Result<String, String> {
+    let response = match http::Request::post("http://localhost:8080/api/frontend/certificate")
+        .header("Content-Type", "application/json")
         .credentials(http::RequestCredentials::Include)
+        .body(credentials)
         .send()
         .await
     {
@@ -171,5 +173,9 @@ pub async fn api_logout_user() -> Result<(), String> {
         }
     }
 
-    Ok(())
+    let res_body = response.text().await;
+    match res_body {
+        Ok(data) => Ok(data),
+        Err(_) => Err("Failed to parse response".to_string()),
+    }
 }

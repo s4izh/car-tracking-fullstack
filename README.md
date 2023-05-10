@@ -63,6 +63,7 @@ Info can be found [here](blockchain/Readme.org)
 Removing everything:
 
 ```bash
+docker system prune -a 
 docker rm -f $(docker ps -aq)
 docker rmi -f $(docker images -aq)
 docker volume rm $(docker volume ls -q)
