@@ -23,7 +23,8 @@ make ganache
 make truffle
 ```
 
-We recommend using `tmux` for handling multiple shells.
+We recommend using [tmux](https://github.com/tmux/tmux/wiki) for handling multiple shells.
+
 
 ## Running the development environment
 
