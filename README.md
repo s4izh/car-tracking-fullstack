@@ -19,12 +19,11 @@ make ganache
 make truffle
 ```
 
+We recommend using [tmux](https://github.com/tmux/tmux/wiki) for handling multiple shells.
+
 ## Endpoints documentation
 
 The endpoints documentation can be found [here](backend/test/README.md).
-
-We recommend using [tmux](https://github.com/tmux/tmux/wiki) for handling multiple shells.
-
 
 ## Running the development environment
 
