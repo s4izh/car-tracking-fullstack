@@ -35,6 +35,23 @@ docker-compose up -d
 make setup
 ```
 
+### Docker
+
+The following command will give you a shell in the container:
+
+```bash
+make docker-$CONTAINER-NAME
+```
+
+Remove everything in case of random cache failures and whatever:
+
+```bash
+docker system prune -a 
+docker rm -f $(docker ps -aq)
+docker rmi -f $(docker images -aq)
+docker volume rm $(docker volume ls -q)
+```
+
 ### Backend dev
 
 After `docker-compose up -d` these are useful commands:
@@ -50,7 +67,7 @@ it manually.
 
 #### MariaDB
 
-Open a shell in the `mariadb` container:
+Open a shell in the `mariadb` container, with a prompt inside the database:
 
 ```bash
 docker exec -ti mariadb mysql -U db -prust
@@ -63,20 +80,21 @@ Run the general development enviroment commands [here](#Running-the-development-
 Useful commands:
 
 ```bash
+make docker-front # enter the frontend container
 make frontend-run # compiles and runs the frontend
 ```
 
-## Running the blockchain locally
+## Running the blockchain
+
+### No containers
 
 Info can be found [here](blockchain/Readme.org)
 
-### Useful docker commands 
+### In containers
 
-Removing everything:
+We recommend the containerized version.
 
 ```bash
-docker system prune -a 
-docker rm -f $(docker ps -aq)
-docker rmi -f $(docker images -aq)
-docker volume rm $(docker volume ls -q)
+make ganache
+make truffle
 ```
