@@ -37,7 +37,8 @@ make setup
 
 ### Docker
 
-The following command will give you a shell in $CONTAINER_NAME:
+The following command will give you a shell in $CONTAINER_NAME,
+check the `Makefile` since some names are shortened.
 
 ```bash
 make docker-$CONTAINER_NAME
