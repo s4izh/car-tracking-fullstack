@@ -121,7 +121,7 @@ async fn get_trips(
                 .into_iter()
                 .map(|bd_car_data| common::Data {
                     timestamp: bd_car_data.timestamp,
-                    speed: bd_car_data.speed / 100,
+                    speed: bd_car_data.speed,
                     rpm: bd_car_data.rpm,
                     throttle: bd_car_data.throttle as f64 / 100.0,
                     engine_load: bd_car_data.engine_load as f64 / 100.0,
@@ -134,7 +134,7 @@ async fn get_trips(
 
             common::Trip {
                 km: in_trip.km,
-                max_speed: in_trip.max_speed,
+                max_speed: in_trip.max_speed as f64 / 100.0,
                 speed_average: in_trip.avg_speed as f64 / 100.0,
                 fuel_percentage: in_trip.fuel_percentage as f64 / 100.0,
                 duration: in_trip.duration,
