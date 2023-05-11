@@ -13,6 +13,18 @@ docker-compose -f prod.yml build
 docker-compose -f prod.yml up
 ```
 
+### Blockchain
+
+Blockchain deployment has to be done manually,
+after running the previous commands run the following:
+
+```bash
+make ganache
+make truffle
+```
+
+We recommend using `tmux` for handling multiple shells.
+
 ## Running the development environment
 
 - Run docker compose to start all the containers
