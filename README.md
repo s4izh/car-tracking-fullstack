@@ -37,10 +37,10 @@ make setup
 
 ### Docker
 
-The following command will give you a shell in the container:
+The following command will give you a shell in $CONTAINER_NAME:
 
 ```bash
-make docker-$CONTAINER-NAME
+make docker-$CONTAINER_NAME
 ```
 
 Remove everything in case of random cache failures and whatever:
