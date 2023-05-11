@@ -528,6 +528,10 @@ video {
   position: fixed;
 }
 
+.absolute{
+  position: absolute;
+}
+
 .top-\[5\.5rem\]{
   top: 5.5rem;
 }
@@ -553,8 +557,20 @@ video {
   margin-bottom: 0.75rem;
 }
 
+.ml-5{
+  margin-left: 1.25rem;
+}
+
 .mt-8{
   margin-top: 2rem;
+}
+
+.mt-4{
+  margin-top: 1rem;
+}
+
+.ml-10{
+  margin-left: 2.5rem;
 }
 
 .mb-4{
@@ -593,6 +609,10 @@ video {
   height: 1.25rem;
 }
 
+.h-\[50rem\]{
+  height: 50rem;
+}
+
 .h-\[20rem\]{
   height: 20rem;
 }
@@ -605,12 +625,16 @@ video {
   width: 100%;
 }
 
-.max-w-4xl{
-  max-width: 56rem;
+.max-w-6xl{
+  max-width: 72rem;
 }
 
 .max-w-md{
   max-width: 28rem;
+}
+
+.max-w-4xl{
+  max-width: 56rem;
 }
 
 @keyframes spin{
@@ -814,6 +838,11 @@ video {
   line-height: 1;
 }
 
+.text-3xl{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 .text-4xl{
   font-size: 2.25rem;
   line-height: 2.5rem;
@@ -822,11 +851,6 @@ video {
 .text-lg{
   font-size: 1.125rem;
   line-height: 1.75rem;
-}
-
-.text-3xl{
-  font-size: 1.875rem;
-  line-height: 2.25rem;
 }
 
 .font-extrabold{

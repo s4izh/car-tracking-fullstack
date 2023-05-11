@@ -155,8 +155,16 @@ pub fn login_page() -> Html {
                                 navigator.push(&router::Route::CarPage);
                             }
                             Err(e) => {
-                                set_page_loading(false, dispatch.clone());
-                                set_show_alert("License Plate or Password Incorrect".to_string(), dispatch);
+                                //If error is 400 then the user is not registered
+                                if e.contains("400") {
+                                    set_page_loading(false, dispatch.clone());
+                                    set_show_alert("License Plate or Password Incorrect".to_string(), dispatch);
+                                } else {
+                                    set_page_loading(false, dispatch.clone());
+                                    set_show_alert(e.to_string(), dispatch);
+                                }
+                              //  set_page_loading(false, dispatch.clone());
+                             //   set_show_alert("License Plate or Password Incorrect".to_string(), dispatch);
                             }
                         };
                     }

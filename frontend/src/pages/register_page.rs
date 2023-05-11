@@ -148,8 +148,13 @@ pub fn register_page() -> Html {
                                 navigator.push(&router::Route::LoginPage);
                             }
                             Err(e) => {
-                                set_page_loading(false, dispatch.clone());
-                                set_show_alert("Account already exists".to_string(), dispatch);
+                                if e.contains("400") {
+                                    set_page_loading(false, dispatch.clone());
+                                    set_show_alert("Account Already Exists".to_string(), dispatch);
+                                } else {
+                                    set_page_loading(false, dispatch.clone());
+                                    set_show_alert(e.to_string(), dispatch);
+                                }
                             }
                         };
                     }
