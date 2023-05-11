@@ -1,9 +1,5 @@
 # Car Tracking
 
-## Endpoints documentation
-
-The endpoints documentation can be found [here](backend/test/README.md).
-
 ## Deployment
 
 Automatic deployment of all containers can be done with the following:
@@ -22,6 +18,10 @@ after running the previous commands run the following:
 make ganache
 make truffle
 ```
+
+## Endpoints documentation
+
+The endpoints documentation can be found [here](backend/test/README.md).
 
 We recommend using [tmux](https://github.com/tmux/tmux/wiki) for handling multiple shells.
 
