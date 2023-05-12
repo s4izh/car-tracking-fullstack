@@ -37,7 +37,7 @@ pub struct UserTrip {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone)]
 pub struct Trip {
     pub km: i32, // km
-    pub max_speed: i32, // km/h
+    pub max_speed: f64, // km/h
     pub speed_average: f64, // km/h
     pub fuel_percentage: f64, // fuel %
     pub duration: i32, // seconds

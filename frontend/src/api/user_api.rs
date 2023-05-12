@@ -3,6 +3,7 @@ use reqwasm::http;
 use gloo::console;
 use serde_json::Value;
 
+const BACKEND_URL: &'static str = std::env!("BACKEND_URL");
 
 // Devuelve un Result ocn un JSONResponse o un String 
 
@@ -42,7 +43,7 @@ pub async fn api_car() -> Result<CarGeneralData, String> {
 } 
     
 pub async fn api_get_trip(user_data: &str) -> Result<UserTrip, String> {
-    let response = match http::Request::post("http://localhost:8080/api/frontend/get-trips")
+    let response = match http::Request::post(format!("{}{}", BACKEND_URL, "/api/frontend/get-trips").as_str())
         .header("Content-Type", "application/json")
         .body(user_data)
         .send()
@@ -69,7 +70,7 @@ pub async fn api_get_trip(user_data: &str) -> Result<UserTrip, String> {
 }
 
 pub async fn api_register_user(user_data: &str) -> Result<String, String> {
-    let response = match http::Request::post("http://localhost:8080/api/create-user")
+    let response = match http::Request::post(format!("{}{}", BACKEND_URL, "/api/create-user").as_str())
         .header("Content-Type", "application/json")
         .body(user_data)
         .send()
@@ -98,7 +99,7 @@ pub async fn api_register_user(user_data: &str) -> Result<String, String> {
 
 
 pub async fn api_login_user(credentials: &str) -> Result<UserData2, String> {
-    let response = match http::Request::post("http://localhost:8080/api/login")
+    let response = match http::Request::post(format!("{}{}", BACKEND_URL, "/api/login").as_str())
         .header("Content-Type", "application/json")
         .credentials(http::RequestCredentials::Include)
         .body(credentials)
@@ -153,7 +154,7 @@ pub async fn api_user_info() -> Result<User, String> {
 }
 
 pub async fn api_certificate(credentials: &str) -> Result<String, String> {
-    let response = match http::Request::post("http://localhost:8080/api/frontend/certificate")
+    let response = match http::Request::post(format!("{}{}", BACKEND_URL, "/frontend/certificate").as_str())
         .header("Content-Type", "application/json")
         .credentials(http::RequestCredentials::Include)
         .body(credentials)

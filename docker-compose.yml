@@ -87,7 +87,7 @@ services:
     stdin_open: true
     tty: true
     environment:
-      - BACKEND_URL=http://backend:8080
+      - BACKEND_URL=http://localhost:8080
       - RUST_LOG=debug
       - CARGO_HOME=/app/.cargo
       - CARGO_TARGET_DIR=/app/target
