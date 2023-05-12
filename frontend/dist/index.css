@@ -557,24 +557,24 @@ video {
   margin-bottom: 0.75rem;
 }
 
-.ml-5{
-  margin-left: 1.25rem;
-}
-
-.mt-8{
-  margin-top: 2rem;
+.mb-4{
+  margin-bottom: 1rem;
 }
 
 .mt-4{
   margin-top: 1rem;
 }
 
-.ml-10{
-  margin-left: 2.5rem;
+.mt-8{
+  margin-top: 2rem;
 }
 
-.mb-4{
-  margin-bottom: 1rem;
+.ml-5{
+  margin-left: 1.25rem;
+}
+
+.ml-10{
+  margin-left: 2.5rem;
 }
 
 .block{
@@ -609,8 +609,8 @@ video {
   height: 1.25rem;
 }
 
-.h-\[50rem\]{
-  height: 50rem;
+.h-\[70rem\]{
+  height: 70rem;
 }
 
 .h-\[20rem\]{
