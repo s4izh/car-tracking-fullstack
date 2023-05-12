@@ -145,7 +145,7 @@ pub fn login_page() -> Html {
                             Err(e) => {
                                 console::log!("Error {}", e);
                             }
-                        };
+                        }; 
                         let res = api_login_user(&form_json).await;
                         match res {
                             Ok(res) => {
