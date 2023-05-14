@@ -5,11 +5,18 @@ use yew::prelude::*;
 pub fn home_page() -> Html {
     html! {
       <>
-        <Header />
-        <section class="bg-ct-blue-600 min-h-screen pt-20">
-            <div class="max-w-4xl mx-auto bg-ct-dark-100 rounded-md h-[20rem] flex justify-center items-center">
-                <p class="text-3xl font-semibold">{"Welcome to Car Tracking"}</p>
+      <Header />
+      <section class="bg-ct-blue-600 min-h-screen pt-20">
+      <div class="max-w-6xl mx-auto bg-ct-dark-100 rounded-md h-[30rem] flex justify-center items-center">
+        <div >
+          <p class="text-5xl font-semibold">{"Welcome To Car Tracking"}</p>   
+                <div class="mt-5 flex justify-center items-center">
+                <a href="http://nattech.fib.upc.edu:40402/" target="_blank" style="color: blue;" >{"View Your Certified KM"}</a> 
+                </div>
             </div>
+          </div>
+            
+
         </section>
       </>
     }
