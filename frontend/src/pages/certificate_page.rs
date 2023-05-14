@@ -137,7 +137,7 @@ pub fn login_page() -> Html {
                         match res {
                             Ok(res) => {
                                 set_page_loading(false, dispatch.clone());
-                                set_show_alert("Certification OK".to_string(), dispatch);
+                                set_show_alert("Certification done!".to_string(), dispatch);
                                 navigator.push(&router::Route::CarPage);
                             }
                             Err(e) => {
