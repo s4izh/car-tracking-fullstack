@@ -154,7 +154,7 @@ pub async fn api_user_info() -> Result<User, String> {
 }
 
 pub async fn api_certificate(credentials: &str) -> Result<String, String> {
-    let response = match http::Request::post(format!("{}{}", BACKEND_URL, "/frontend/certificate").as_str())
+    let response = match http::Request::post(format!("{}{}", BACKEND_URL, "api/frontend/certificate").as_str())
         .header("Content-Type", "application/json")
         .credentials(http::RequestCredentials::Include)
         .body(credentials)
