@@ -1,0 +1,24 @@
+#!/bin/sh
+
+GITHUB_USER="s4izh"
+GITHUB_REPO="car-tracking-fullstack"
+LAST_COMMIT_FILE="/tmp/last-commit"
+
+if [ -f "$LAST_COMMIT_FILE" ]; then
+  LAST_COMMIT=$(cat "$LAST_COMMIT_FILE")
+else
+  LAST_COMMIT=""
+fi
+
+API_URL="https://api.github.com/repos/$GITHUB_USER/$GITHUB_REPO/commits/main"
+NEW_COMMIT=$(curl -s "$API_URL" | grep -m 1 -o '"sha": "[^"]*' | cut -d'"' -f4)
+
+if [ "$LAST_COMMIT" == "$NEW_COMMIT" ]; then
+  echo "No new commit found"
+else
+  echo "New commit found: $NEW_COMMIT, redeploying..." >> /tmp/deploy.log 
+  echo "$NEW_COMMIT" > "$LAST_COMMIT_FILE"
+  cd /app
+  docker-compose down
+  docker-compose up -d
+fi
