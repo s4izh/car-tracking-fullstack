@@ -19,6 +19,8 @@ else
   echo "New commit found: $NEW_COMMIT, redeploying..." >> /tmp/deploy.log 
   echo "$NEW_COMMIT" > "$LAST_COMMIT_FILE"
   cd /app
+  git restore .
+  git pull
   docker-compose down
   docker-compose up -d
 fi
