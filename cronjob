@@ -22,5 +22,6 @@ else
   git restore .
   git pull
   docker-compose down
-  docker-compose up -d
+  docker-compose -f prod.yml build
+  docker-compose -f prod.yml up -d
 fi
