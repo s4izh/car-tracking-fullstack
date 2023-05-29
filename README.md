@@ -9,6 +9,8 @@ docker-compose -f prod.yml build
 docker-compose -f prod.yml up
 ```
 
+The script [cronjob](cronjob) can be used as a cronjob to automate the deployment.
+
 ### Blockchain
 
 Blockchain deployment has to be done manually,
