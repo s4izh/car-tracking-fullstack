@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# this script is meant to run as a cronjob every 5 minutes
+# in the server that hosts the app
+
 GITHUB_USER="s4izh"
 GITHUB_REPO="car-tracking-fullstack"
 LAST_COMMIT_FILE="/tmp/last-commit"
