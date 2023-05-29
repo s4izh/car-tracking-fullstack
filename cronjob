@@ -24,4 +24,8 @@ else
   docker-compose down
   docker-compose -f prod.yml build
   docker-compose -f prod.yml up -d
+  sleep 10
+  docker exec -ti blockchain make ganache &
+  sleep 10
+  docker exec -ti blockchain make truffle &
 fi
